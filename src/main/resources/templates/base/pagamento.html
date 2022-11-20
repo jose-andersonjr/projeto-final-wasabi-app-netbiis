@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wasabi Sushi - Pagamento</title>
+    <link rel="stylesheet" href="pagamento.css" />
+    <link rel="stylesheet" href="botao-e-gaveta.css" />
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+  </head>
+  <body>
+    <!-- gaveta inicio -->
+    <button class="btn-float" onclick="openNav()">
+      <i class="bi bi-list"></i>
+    </button>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <img
+        id="wasabi-logo-drawer"
+        src="img/logo-wasabiapp.png"
+        alt="logo_wasabi_sushi.png"
+      />
+      <div id="div-boas-vindas">
+        <p>Seja bem-vindo(a) "nome_cliente"</p>
+      </div>
+      <div class="btns-gaveta">
+        <a href="home.html" id="sidenav-home-btn"
+          >Home<i style="float: right" class="bi bi-house"></i>
+        </a>
+        <a href="alterar-cadastro.html"
+          >Alterar cadastro<i
+            style="float: right"
+            class="bi bi-person-circle"
+          ></i
+        ></a>
+        <a href="meuspedidos.html"
+          >Meus pedidos<i style="float: right" class="bi bi-list-task"></i
+        ></a>
+        <a id="btn-sair" href="login.html"
+          >Sair da conta<i
+            style="float: right"
+            class="bi bi-box-arrow-right"
+          ></i
+        ></a>
+      </div>
+    </div>
+    <!-- gaveta fim -->
+    <div class="container-modal">
+      <div class="row conteudo-modal d-flex">
+        <p id="modal-texto-up">Pedido realizado com sucesso!</p>
+        <img src="img/check-mark.png" alt="" id="img-check-mark" />
+        <p id="modal-texto-down">Prazo para entrega: 50 a 60 minutos</p>
+        <div id="container-btn-voltar-tela-principal">
+          <a href="home.html" id="btn-voltar-tela-principal"
+            >Voltar à tela principal</a
+          >
+        </div>
+      </div>
+    </div>
+    <div id="background" onclick="closeNav()">
+      <div class="flex-container">
+        <div id="container-lista-pedido" class="flex-child">
+          <div id="titulo-carrinho">Pedido</div>
+          <hr />
+          <div class="listapedido"></div>
+          <hr />
+          <div class="row mt-3 mb-4">
+            <a href="login.html">Alterar pedido</a>
+          </div>
+        </div>
+        <div id="container-menu-pagamento" class="flex-child">
+          <div id="div-topo-menu-pagamento">
+            <div id="div-info-cliente">
+              <p id="p-nome-cliente">Cliente: "nome_cliente"</p>
+              <p id="p-endereco-cliente">
+                Endereço: ""logradouro_cliente"", ""numero_cliente"",
+                ""bairro_cliente"" - ""cidade_cliente""<br />
+                ""complemento_cliente""
+              </p>
+            </div>
+            <div id="div-status-tempo">
+              <div id="card-status-tempo">
+                <div id="row-status">
+                  <p>Status: &nbsp;&nbsp;Aberto</p>
+                  <img id="img-green-light" src="img/green-light.png" alt="" />
+                </div>
+                <div id="row-previsao">
+                  <p>Previsão:</p>
+                  <p>50 a 60 minutos</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="div-observacao-final">
+            <label id="observacao-final" for="observacao-final"
+              >Informações adicionais</label
+            ><br />
+            <textarea id="observacao-final" name="observacao-final"></textarea>
+          </div>
+          <div id="div-forma-pagamento">
+            <p id="title-pagamento">Pagamento na entrega</p>
+            <hr id="hr-pagamento" />
+            <div id="div-opcoes-pagamento">
+              <div id="div-opcao-dinheiro">
+                <img id="dinheiro-icone" src="img/dinheiro-icone.png" alt="" />
+                <label for="opcao-dinheiro">Dinheiro </label>
+                <input
+                  type="radio"
+                  id="opcao-dinheiro"
+                  name="opcao-pagamento-radio"
+                  value=""
+                />
+              </div>
+              <hr />
+              <div id="div-opcao-credito">
+                <img id="credito-icone" src="img/icon-credit-card.png" alt="" />
+                <label for="opcao-credito" style="text-align: left"
+                  >Cartão de crédito</label
+                >
+                <input
+                  type="radio"
+                  id="opcao-credito"
+                  name="opcao-pagamento-radio"
+                  value=""
+                />
+              </div>
+              <hr />
+              <div id="div-opcao-debito">
+                <img id="debito-icone" src="img/icon-debit-card.png" alt="" />
+                <label for="opcao-debito">Cartão de débito</label>
+                <input
+                  type="radio"
+                  id="opcao-debito"
+                  name="opcao-pagamento-radio"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div id="div-pagamento-escolhido">
+            <label for="input-troco">Troco: </label>
+            <input type="text" name="input-troco" id="input-troco" />
+          </div>
+        </div>
+      </div>
+      <div id="container-botao-pedido">
+        <input
+          type="submit"
+          value="Enviar pedido"
+          class="btn btn-primary mt-5"
+          id="btn-enviar-pedido"
+        />
+      </div>
+    </div>
+    <script src="pagamento.js" defer></script>
+  </body>
+</html>
