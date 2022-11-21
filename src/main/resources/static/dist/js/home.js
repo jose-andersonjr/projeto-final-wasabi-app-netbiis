@@ -9,6 +9,8 @@ const switchModal = () => {
     let nomeModal = document.querySelector('.container-nome-modal')
     let descricaoModal = document.querySelector('.container-descricao-modal')
     let valorUnitModal = document.querySelector('#valor-unit-modal')
+    let formularioSpring = document.querySelector('.formulario-spring')
+    console.log(formularioSpring)
     while (nomeModal.firstChild) {
       nomeModal.removeChild(nomeModal.firstChild)
     }
@@ -20,6 +22,9 @@ const switchModal = () => {
     }
     while (valorUnitModal.firstChild) {
       valorUnitModal.removeChild(valorUnitModal.firstChild)
+    }
+    while (formularioSpring.firstChild) {
+      formularioSpring.removeChild(formularioSpring.firstChild)
     }
   } else {
     modal.style.display = 'block'
@@ -140,7 +145,19 @@ for (let i = 0; i < cardsProdutos.length; i++) {
         '.container-descricao-modal'
       )
       let containerValorUnitModal = document.querySelector('#valor-unit-modal')
+      
+      
+      let containerValorTotal = document.querySelector('#valor-total-modal span') 
+      let valorUnitario = valorUnitDoCardClone.textContent
 
+      containerValorTotal.innerText =  valorUnitario
+	
+	// ================================= PASSANDO O FORM (HIDDEN) DO CARD PARA O MODAL ==================================================
+		const springForm = cardProduto.querySelector('.formulario-spring')
+		const springFormClone = springForm.cloneNode(true)
+		const containerBotoesModal = document.querySelector('.container-informacoes-modal')
+		springFormClone.classList.remove("hidden")
+		containerBotoesModal.append(springFormClone)
       containerImagemModal.appendChild(imagemDoCardClone)
       containerNomeModal.appendChild(nomeDoCardClone)
       containerDescricaoModal.append(descricaoDoCard)
@@ -162,8 +179,9 @@ function alterarValorTotal(event) {
   precoProdutoModal = precoProdutoModal.replace('R$', '').replace(',', '.')
   let containerValorTotal = document.querySelector('#valor-total-modal span')
   let valorTotal = precoProdutoModal * qtdProduto
-  valorTotal = round(valorTotal)
-  containerValorTotal.innerText = valorTotal
+  valorTotal = round(valorTotal).toFixed(2)
+  valorTotal = valorTotal.toString(10)
+  containerValorTotal.innerText = 'R$ ' + valorTotal.replace('.',',')
 }
 
 // =============================================================== GAVETA ========================================================
@@ -193,3 +211,5 @@ function habilitarPagamento() {
     btnPagamento.disabled = true
   }
 }
+
+

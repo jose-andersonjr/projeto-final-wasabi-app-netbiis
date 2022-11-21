@@ -79,25 +79,13 @@
 						<textarea name="observacoes" id="observacoes"
 							placeholder="Observação..." maxlength="99"></textarea>
 						<div class="container-quantidade-preco-modal row">
-							<div class="col-6" id="quantidade-modal">
-								<label for="number">Quantidade</label> <input type="number"
-									min="1" value="1" onkeydown="return false"
-									onclick="alterarValorTotal(this)" id="quantidade" />
-							</div>
-							<div class="col-6" id="valor-unit-modal"></div>
+							<div class="col-6" id="valor-unit-modal">Unidade: </div>
 							<div class="col-6"></div>
 							<div class="col-6" id="valor-total-modal">
 								Subtotal: R$ <span></span>
 							</div>
 						</div>
-						<div class="container-botoes-modal">
-							<div class="row" id="botoes-comando">
-								<button class="btn btn-primary mt-3" id="btn-voltar">
-									Voltar</button>
-								<button class="btn btn-primary mt-3" id="btn-adicionar">
-									Adicionar</button>
-							</div>
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -135,23 +123,22 @@
 											</div>
 											<!-- 											<div class="id-produto" style="display: none">Id -->
 											<!-- 												produto</div> -->
-										</div>
-										<form th:action="@{/adicionarProdutoCarrinho}" method="POST">
-											<div class="container-botoes-modal">
-												<input type="hidden" th:value="${produto.idProduto}"
-													name="idProduto" />
-												<div class="row">
-													<div class="col-xl-4 col-sm-12 mt-3">
-														<input type="number" name="quantidade"
-															class="quantidade-modal" min="1" value="1" />
+
+										<form th:action="@{/adicionarProdutoCarrinho}" method="POST" class="hidden formulario-spring">
+
+													<label for="quantidade">Quantidade</label> 
+													<input type="number" min="1" value="1" onkeydown="return false" onclick="alterarValorTotal(this)" id="quantidade" name="quantidade"/>												
+													<input type="hidden" th:value="${produto.idProduto}" name="idProduto"/>
+													<div class="container-botoes-modal" >
+														<div id="botoes-comando">
+															<button class="btn btn-primary" id="btn-voltar">Voltar</button>
+															<input type="submit" class="btn btn-primary" value="Adicionar" id="btn-adicionar"/>
+														</div>	
 													</div>
-													<div class="col-xl-4 col-sm-12 mt-3">
-														<input type="submit" class="btn btn-primary"
-															value="Adicionar" />
-													</div>
-												</div>
-											</div>
+												
 										</form>
+										</div>
+										
 									</div>
 								</th:block>
 							</th:block>
