@@ -1,10 +1,14 @@
 package br.com.wasabisushi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.wasabisushi.model.Categoria;
 import br.com.wasabisushi.model.Cliente;
 import br.com.wasabisushi.model.Endereco;
 import br.com.wasabisushi.model.Produto;
+import br.com.wasabisushi.model.ProdutoPedido;
 import br.com.wasabisushi.model.Usuario;
 import br.com.wasabisushi.repository.Categorias;
 import br.com.wasabisushi.repository.Clientes;
@@ -41,6 +47,8 @@ public class MainController {
 
 	boolean logado;
 
+	List<ProdutoPedido> produtosPedido = new ArrayList<ProdutoPedido>();
+
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("usuario/login");
@@ -64,6 +72,7 @@ public class MainController {
 
 		usuario = null;
 		this.logado = false;
+		this.produtosPedido.clear();
 		return "redirect:/login";
 	}
 
@@ -128,12 +137,62 @@ public class MainController {
 	}
 
 	@RequestMapping(value = { "/salvarAlteracao" }, method = RequestMethod.POST)
-	public ModelAndView salvarAlteracao(Usuario usuario, Cliente cliente, Endereco endereco) {
+	public ModelAndView salvarAlteracao(@Valid Usuario usuario, @Valid Cliente cliente, @Valid Endereco endereco,
+			final BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
-		System.out.println("usuario "+usuario.getIdUsuario());
+		System.out.println("usuario " + usuario.getIdUsuario());
+		System.out.println("cliente" + cliente.getIdCliente());
+		System.out.println("endereco" + endereco.getCep());
+
+		model.addAttribute("usuarios", usuario);
+		model.addAttribute("clientes", cliente);
+		model.addAttribute("endereco", endereco);
 
 		this.usuarios.saveAndFlush(usuario);
+		cliente.setUsuario(usuario);
 		this.clientes.saveAndFlush(cliente);
+		endereco.setCliente(cliente);
+		this.enderecos.saveAndFlush(endereco);
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/home");
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = { "/pagamento" }, method = RequestMethod.GET)
+	public ModelAndView pagamento() {
+		ModelAndView pagamento = new ModelAndView("base/pagamento");
+		ModelAndView acesso_negado = new ModelAndView("base/acesso_negado");
+		pagamento.addObject("usuario", usuario);
+		Cliente cliente = clientes.findByUsuario(usuario);
+		pagamento.addObject("cliente", cliente);
+		Endereco endereco = enderecos.findByCliente(cliente);
+		pagamento.addObject("endereco", endereco);
+		pagamento.addObject("categorias", categorias.findAll());
+		pagamento.addObject("produtosPedido", produtosPedido);
+
+		if (this.logado)
+			return pagamento;
+
+		return acesso_negado;
+	}
+
+	@RequestMapping(value = { "/salvarPedido" }, method = RequestMethod.POST)
+	public ModelAndView salvarPedido(@Valid Usuario usuario, @Valid Cliente cliente, @Valid Endereco endereco,
+			final BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+
+		System.out.println("usuario " + usuario.getIdUsuario());
+		System.out.println("cliente" + cliente.getIdCliente());
+		System.out.println("endereco" + endereco.getCep());
+
+		model.addAttribute("usuarios", usuario);
+		model.addAttribute("clientes", cliente);
+		model.addAttribute("endereco", endereco);
+
+		this.usuarios.saveAndFlush(usuario);
+		cliente.setUsuario(usuario);
+		this.clientes.saveAndFlush(cliente);
+		endereco.setCliente(cliente);
 		this.enderecos.saveAndFlush(endereco);
 
 		ModelAndView modelAndView = new ModelAndView("redirect:/home");
@@ -154,13 +213,29 @@ public class MainController {
 		home.addObject("usuario", usuario);
 		home.addObject("cliente", clientes.findByUsuario(usuario));
 		home.addObject("categorias", categorias.findAll());
-		Categoria categoria = categorias.findByIdCategoria(1);
-		home.addObject("promocoes", produtos.findByCategoria(categoria));
+		home.addObject("carrinho", produtosPedido);
 
 		if (this.logado)
 			return home;
 
 		return acesso_negado;
+	}
+
+	//@ResponseBody
+	@RequestMapping(value = { "/adicionarProdutoCarrinho" }, method = RequestMethod.POST)
+	public ModelAndView adicionar(Integer quantidade, Integer idProduto, Model model) {
+		ProdutoPedido produtoPedido = new ProdutoPedido();
+		Produto produto = produtos.findByIdProduto(idProduto);
+
+		produtoPedido.setProduto(produto);
+		produtoPedido.setQuantidade(quantidade);
+		produtoPedido.setSubtotal(quantidade * produto.getPreco());
+
+		produtosPedido.add(produtoPedido);
+		
+		ModelAndView modelAndView = new ModelAndView("redirect:/home");
+
+		return modelAndView;
 	}
 
 	@GetMapping("/produtos/{idCategoria}")

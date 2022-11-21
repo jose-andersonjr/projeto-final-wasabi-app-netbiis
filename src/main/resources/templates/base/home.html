@@ -53,9 +53,9 @@
 				style="float: right" class="bi bi-house"></i>
 			</a>
 			<form th:action="@{/alterarCadastro}">
-			<input type="hidden" th:field="*{usuario.idUsuario}" name="idUsuario" />
-				<input type="submit" value="Alterar Cadastro" /> <i
-					style="float: right" class="bi bi-person-circle"></i>
+				<input type="hidden" th:field="*{usuario.idUsuario}"
+					name="idUsuario" /> <input type="submit" value="Alterar Cadastro" />
+				<i style="float: right" class="bi bi-person-circle"></i>
 			</form>
 			<a id="btn-sair" th:href="@{/logout}">Sair da conta<i
 				style="float: right" class="bi bi-box-arrow-right"></i></a>
@@ -133,28 +133,77 @@
 											<div class="imagem-produto col-4">
 												<img th:src="|/imagem/${produto.idProduto}|" alt="" />
 											</div>
+											<!-- 											<div class="id-produto" style="display: none">Id -->
+											<!-- 												produto</div> -->
 										</div>
+										<form th:action="@{/adicionarProdutoCarrinho}" method="POST">
+											<div class="container-botoes-modal">
+												<input type="hidden" th:value="${produto.idProduto}"
+													name="idProduto" />
+												<div class="row">
+													<div class="col-xl-4 col-sm-12 mt-3">
+														<input type="number" name="quantidade"
+															class="quantidade-modal" min="1" value="1" />
+													</div>
+													<div class="col-xl-4 col-sm-12 mt-3">
+														<input type="submit" class="btn btn-primary"
+															value="Adicionar" />
+													</div>
+												</div>
+											</div>
+										</form>
 									</div>
 								</th:block>
 							</th:block>
 						</div>
 					</div>
 				</div>
+				<!-- 				<div class="col-xl-3 col-sm-12 container-principal-carrinho"> -->
+				<!-- 					<form th:action="@{/pagamento}" method="GET"> -->
+				<!-- 						<div class="col-12 container-conteudo-carrinho"> -->
+				<!-- 							<div id="titulo-carrinho">Pedido</div> -->
+				<!-- 							<hr /> -->
+				<!-- 							<div class="listapedido"></div> -->
+				<!-- 							<hr /> -->
+				<!-- 							<div class="descricao-pedido"> -->
+				<!-- 								<div>Taxa de entrega: R$ 10,00</div> -->
+				<!-- 								<div> -->
+				<!-- 									Total: R$ <span id="totalpedidocarrinho"></span> -->
+				<!-- 								</div> -->
+				<!-- 							</div> -->
+				<!-- 							<input type="submit" class="pagamentobtn btn btn-primary" -->
+				<!-- 								id="pagamento-btn" value="Ir ao pagamento" /> -->
+				<!-- 						</div> -->
+				<!-- 					</form> -->
+				<!-- 				</div> -->
 				<div class="col-xl-3 col-sm-12 container-principal-carrinho">
-					<div class="col-12 container-conteudo-carrinho">
-						<div id="titulo-carrinho">Pedido</div>
-						<hr />
-						<div class="listapedido"></div>
-						<hr />
-						<div class="descricao-pedido">
-							<div>Taxa de entrega: R$ 10,00</div>
-							<div>
-								Total: R$ <span id="totalpedidocarrinho"></span>
+					<form th:action="@{/pagamento}" method="GET">
+						<div class="col-12 container-conteudo-carrinho">
+							<div id="titulo-carrinho">Pedido</div>
+							<hr />
+							<div class="listapedido">
+								<th:block th:each="produtoPedido : ${carrinho}">
+									<div>
+										<p th:text="${produtoPedido.produto.nome}"></p>
+										<p th:text="${produtoPedido.produto.descricao}"></p>
+										<p th:text="${produtoPedido.quantidade}"></p>
+										<hr/>
+										<p th:text="${produtoPedido.subtotal}"></p>
+									</div>
+									<hr />
+								</th:block>
 							</div>
+							<hr />
+							<div class="descricao-pedido">
+								<div>Taxa de entrega: R$ 10,00</div>
+								<div>
+									Total: R$ <span id="totalpedidocarrinho"></span>
+								</div>
+							</div>
+							<input type="submit" class="pagamentobtn btn btn-primary"
+								id="pagamento-btn" value="Ir ao pagamento" />
 						</div>
-						<input type="submit" class="pagamentobtn btn btn-primary"
-							id="pagamento-btn" value="Ir ao pagamento" />
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>

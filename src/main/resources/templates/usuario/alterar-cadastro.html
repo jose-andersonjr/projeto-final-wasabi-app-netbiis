@@ -51,17 +51,17 @@
 			<div class="col-xl-7" id="container-form">
 
 				<form th:action="@{/salvarAlteracao}" class="d-block"
-					style="padding-bottom: 5%" method="POST">
+					style="padding-bottom: 5%" method="post">
 					<div class="pb-3 pt-4 row" id="titulo-cadastrar">Alterar
 						cadastro</div>
 					<div class="row container-inputs">
 						<hr />
 						<input type="hidden" th:field="*{clientes.idCliente}"
-							name="idCliente" />
+							name="idCliente" id="idCliente" />
 						<div class="form-group col-6">
 							<label for="nome">Nome completo</label> <input type="text"
 								class="form-control" th:filed="*{clientes.nome}"
-								th:value="${clientes.nome}" name="nome"
+								th:value="${clientes.nome}" name="nome" id="nome"
 								placeholder="Insira seu nome" required />
 						</div>
 						<div class="form-group col-6">
@@ -78,22 +78,23 @@
 								placeholder="Insira seu CPF" required />
 						</div>
 
-						<input type="hidden" th:filed="*{usuarios.idUsuario}"
-							th:value="${usuarios.idUsuario}"/>
+						<input type="hidden" th:field="*{usuarios.idUsuario}"
+							name="idUsuario" id="idUsuario" />
 						<div class="form-group col-6 pb-3">
 							<label for="email">Email</label> <input type="email"
-								class="form-control" th:filed="*{usuarios.email}" th:value="${usuarios.email}" name="email"
+								class="form-control" th:filed="*{usuarios.email}"
+								th:value="${usuarios.email}" name="email"
 								placeholder="Insira seu email" required />
 						</div>
 						<hr />
+
+						<input type="hidden" th:field="*{enderecos.idEndereco}"
+							name="idEndereco" id="idEndereco" />
 						<div class="form-group col-6">
-							<input type="hidden" th:filed="*{enderecos.idEndereco}"
-								th:value="${enderecos.idEndereco}" /> <label for="cep">CEP</label>
-							<input type="text" class="form-control"
-								th:filed="*{enderecos.cep}" th:value="${enderecos.cep}"
-								name="
-								cep" placeholder="CEP" id="input-cep"
-								minlength="8" maxlength="8" />
+							<label for="cep">CEP</label> <input type="text"
+								class="form-control" th:value="${enderecos.cep}"
+								th:field="*{enderecos.cep}" name="cep" placeholder="CEP"
+								id="cep" minlength="8" maxlength="8" />
 						</div>
 						<div class="form-group col-6">
 							<label for="bairro">Bairro</label> <input type="text"
@@ -135,9 +136,9 @@
 						</div>
 						<div class="form-group col-6">
 							<label for="password">Confirmar senha</label> <input
-								type="password" class="form-control"
-								name="password" placeholder="Insira novamente sua senha"
-								minlength="6" maxlength="6" id="confirmarSenha" required />
+								type="password" class="form-control" name="password"
+								placeholder="Insira novamente sua senha" minlength="6"
+								maxlength="6" id="confirmarSenha" required />
 						</div>
 						<div class="row d-flex justify-content-center">
 							<input type="submit" value="Finalizar alterações"
