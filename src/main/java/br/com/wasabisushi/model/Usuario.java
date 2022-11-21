@@ -5,9 +5,9 @@ package br.com.wasabisushi.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,9 +31,8 @@ public class Usuario implements java.io.Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(String email, String senha) {
+	public Usuario(String email) {
 		this.email = email;
-		this.senha = senha;
 	}
 
 	public Usuario(String email, String senha, Set<Cliente> clientes) {
@@ -72,7 +71,7 @@ public class Usuario implements java.io.Serializable {
 		this.senha = senha;
 	}
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	public Set<Cliente> getClientes() {
 		return this.clientes;
 	}

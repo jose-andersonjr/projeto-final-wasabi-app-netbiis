@@ -30,7 +30,7 @@ botaoCadastrar.addEventListener('mouseenter', () => {
 
 // =========================== AUTOCOMPLETE CEP ========================================= //
 
-const inputCEP = document.querySelector('#input-cep')
+const inputCEP = document.querySelector('#cep')
 const inputCPF = document.querySelector('#input-cpf')
 const inputTelefone = document.querySelector('#input-telefone')
 const inputCidade = document.querySelector('#cidade')
@@ -73,7 +73,7 @@ inputCEP.addEventListener('keyup', (e) => {
   const valorInput = e.target.value.replace('-', '')
 
   if (valorInput.length === 8) {
-    inputCEP.disabled = true
+    inputCEP.disabled = false
     getAddress(valorInput)
   }
 })

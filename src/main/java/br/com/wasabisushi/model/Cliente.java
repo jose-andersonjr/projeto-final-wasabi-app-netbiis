@@ -4,9 +4,6 @@ package br.com.wasabisushi.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -64,8 +61,7 @@ public class Cliente implements java.io.Serializable {
 		this.idCliente = idCliente;
 	}
 
-	@ManyToOne
-	@Cascade({CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario")
 	public Usuario getUsuario() {
 		return this.usuario;
