@@ -1,6 +1,8 @@
 package br.com.wasabisushi.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,13 +23,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.wasabisushi.model.Categoria;
 import br.com.wasabisushi.model.Cliente;
 import br.com.wasabisushi.model.Endereco;
+import br.com.wasabisushi.model.Pedido;
 import br.com.wasabisushi.model.Produto;
 import br.com.wasabisushi.model.ProdutoPedido;
 import br.com.wasabisushi.model.Usuario;
 import br.com.wasabisushi.repository.Categorias;
 import br.com.wasabisushi.repository.Clientes;
 import br.com.wasabisushi.repository.Enderecos;
+import br.com.wasabisushi.repository.Pedidos;
 import br.com.wasabisushi.repository.Produtos;
+import br.com.wasabisushi.repository.ProdutosPedidos;
 import br.com.wasabisushi.repository.Usuarios;
 
 @Controller
@@ -43,11 +48,22 @@ public class MainController {
 	@Autowired
 	Enderecos enderecos;
 
+	@Autowired
+	private Pedidos pedidos;
+
+	@Autowired
+	private ProdutosPedidos produtosPedidos;
+
 	Usuario usuario;
 
 	boolean logado;
 
 	List<ProdutoPedido> produtosPedido = new ArrayList<ProdutoPedido>();
+
+	public Date data = new Date();
+	SimpleDateFormat fd = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat hf = new SimpleDateFormat("HH:mm:ss");
+	SimpleDateFormat dfBR = new SimpleDateFormat("dd/MM/yyyy");
 
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -169,7 +185,8 @@ public class MainController {
 		Endereco endereco = enderecos.findByCliente(cliente);
 		pagamento.addObject("endereco", endereco);
 		pagamento.addObject("categorias", categorias.findAll());
-		pagamento.addObject("produtosPedido", produtosPedido);
+		pagamento.addObject("carrinho", this.produtosPedido);
+		pagamento.addObject("pagamento", new Pedido());
 
 		if (this.logado)
 			return pagamento;
@@ -178,22 +195,32 @@ public class MainController {
 	}
 
 	@RequestMapping(value = { "/salvarPedido" }, method = RequestMethod.POST)
-	public ModelAndView salvarPedido(@Valid Usuario usuario, @Valid Cliente cliente, @Valid Endereco endereco,
-			final BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+	public ModelAndView salvarPedido(@Valid Cliente cliente, @Valid Pedido pedido, final BindingResult result,
+			Model model, RedirectAttributes redirectAttributes) {
 
-		System.out.println("usuario " + usuario.getIdUsuario());
-		System.out.println("cliente" + cliente.getIdCliente());
-		System.out.println("endereco" + endereco.getCep());
+		System.out.println("cliente " + cliente.getIdCliente());
 
-		model.addAttribute("usuarios", usuario);
-		model.addAttribute("clientes", cliente);
-		model.addAttribute("endereco", endereco);
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("pedidos", pedido);
 
-		this.usuarios.saveAndFlush(usuario);
-		cliente.setUsuario(usuario);
-		this.clientes.saveAndFlush(cliente);
-		endereco.setCliente(cliente);
-		this.enderecos.saveAndFlush(endereco);
+		Float valorPedido = 0f;
+		Float taxaEntrega = 10f;
+
+		for (ProdutoPedido produtoPedido : this.produtosPedido) {
+			valorPedido += produtoPedido.getSubtotal();
+		}
+
+		pedido.setValorTotal(taxaEntrega + valorPedido);
+		pedido.setCliente(cliente);
+		pedido.setData(this.fd.format(this.data));
+		pedido.setHora(this.hf.format(this.data));
+		this.pedidos.save(pedido);
+
+		for (ProdutoPedido produtoPedido : this.produtosPedido) {
+			produtoPedido
+					.setPedido(pedidos.getPedidoByDataAndHoraAndCliente(pedido.getData(), pedido.getHora(), cliente));
+			produtosPedidos.save(produtoPedido);
+		}
 
 		ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
@@ -221,7 +248,7 @@ public class MainController {
 		return acesso_negado;
 	}
 
-	//@ResponseBody
+	// @ResponseBody
 	@RequestMapping(value = { "/adicionarProdutoCarrinho" }, method = RequestMethod.POST)
 	public ModelAndView adicionar(Integer quantidade, Integer idProduto, Model model) {
 		ProdutoPedido produtoPedido = new ProdutoPedido();
@@ -231,8 +258,8 @@ public class MainController {
 		produtoPedido.setQuantidade(quantidade);
 		produtoPedido.setSubtotal(quantidade * produto.getPreco());
 
-		produtosPedido.add(produtoPedido);
-		
+		this.produtosPedido.add(produtoPedido);
+
 		ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
 		return modelAndView;
