@@ -1,0 +1,306 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: 700;
+  font: inherit;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+.flex-container {
+  display: flex;
+}
+
+#container-lista-pedido {
+  background-color: white;
+  margin: 0.5rem 0 0 0.5rem;
+  width: 25%;
+  height: 90vh;
+  -webkit-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  -moz-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+}
+
+#container-menu-pagamento {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 0.5rem 0 0 0.5rem;
+  width: 50%;
+  height: 90vh;
+  -webkit-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  -moz-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+}
+
+#container-botao-pedido {
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  margin: 0.5rem 0.5rem 0 0.5rem;
+  
+}
+
+
+.container-modal {
+  font-size: 20px;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.conteudo-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  margin: 12% auto;
+  padding: 1%;
+  border-radius: 3px;
+  width: 30%;
+  height: 40%;
+  color: var(--title);
+  -webkit-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  -moz-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+}
+
+#img-check-mark {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 40%;
+}
+
+#modal-texto-up {
+  text-align: center;
+}
+
+#modal-texto-down {
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: rgb(215, 17, 17);
+  border: none;
+  font-weight: 700;
+  border-radius: 0.2em;
+}
+
+.btn-primary:hover {
+  background-color: rgb(135, 6, 6);
+  transition: 0.3s;
+}
+
+.btn {
+  font-size: 15px;
+  font-weight: 500;
+  height: 5vh;
+  width: 30vh;
+}
+#btn-enviar-pedido {
+  color:white;
+}
+
+#btn-enviar-pedido:disabled {
+  background: #7a7878;
+}
+
+
+#btn-voltar-tela-principal {
+  border-radius: 3px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  font-size: 17px;
+  height: 5vh;
+  width: 50%;
+  text-decoration: none;
+}
+
+#input-troco{
+  border: 1px solid;
+}
+
+#container-btn-voltar-tela-principal {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+}
+
+#titulo-carrinho {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 8%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(44, 45, 47, 0.938);
+}
+
+.listapedido {
+  list-style: none;
+  padding: 3%;
+  background-color: rgb(116, 124, 142);
+  font-size: 16px;
+  overflow: auto;
+  height: 60vh;
+  margin-inline: 2%;
+}
+
+#div-info-cliente {
+  padding: 3%;
+  height: 15%;
+  width: 70%;
+}
+
+#div-observacao-final {
+  display: flex;
+  padding-inline: 3%;
+  flex-direction: column;
+  justify-content: center;
+  height: 30%;
+}
+
+textarea#observacao-final {
+  width: auto;
+  height: 50%;
+  resize: none;
+  border: solid 1px black;
+}
+
+#div-forma-pagamento {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 35%;
+  padding: 3%;
+  text-align: center;
+  font-size: medium;
+  font-weight: lighter;
+}
+
+#hr-pagamento {
+  background-color: brown;
+  height: 2px;
+}
+
+#div-pagamento-escolhido {
+  padding-inline: 3%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#div-opcoes-pagamento {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#div-opcao-dinheiro,
+#div-opcao-credito,
+#div-opcao-debito {
+  border-radius: 3px;
+  align-items: center;
+  padding-inline: 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 3rem;
+  background-color: whitesmoke;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px;
+}
+
+#div-opcao-dinheiro:hover,
+#div-opcao-credito:hover,
+#div-opcao-debito:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+input#opcao-dinheiro,
+input#opcao-credito,
+input#opcao-debito {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+#div-topo-menu-pagamento {
+  display: flex;
+  flex-direction: row;
+}
+
+#div-status-tempo {
+  padding: 2%;
+  background-color: white;
+  margin: 3%;
+  width: 25%;
+  height: 2.3rem;
+  -webkit-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  -moz-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  justify-content: space-between;
+  border-radius: 3px;
+}
+
+#title-pagamento {
+  margin-top: 2%;
+  color: brown;
+}
+
+#row-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#img-green-light {
+  height: 7%;
+  width: 7%;
+}
+
+#row-previsao {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#p-nome-cliente {
+  color: black;
+  font-size: 18px;
+}
+
+#p-endereco-cliente {
+  color: rgb(97, 97, 97);
+  font-size: 16px;
+}
+
+#dinheiro-icone {
+  height: 50%;
+}
+
+#credito-icone {
+  height: 50%;
+}
+
+#debito-icone {
+  height: 50%;
+}

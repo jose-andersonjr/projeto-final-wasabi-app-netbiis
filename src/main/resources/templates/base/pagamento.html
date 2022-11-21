@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="pt-br"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wasabi Sushi - Pagamento</title>
+<link rel="stylesheet" th:href="@{../dist/css/pagamento.css}" />
+<link rel="stylesheet" th:href="@{../dist/css/botao-e-gaveta.css}" />
+<link rel="shortcut icon" th:href="@{/images/favicon.ico}" />
+</head>
+<body>
+	<!-- gaveta inicio -->
+	<button class="btn-float" onclick="openNav()">
+		<i class="bi bi-list"></i>
+	</button>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<img id="wasabi-logo-drawer" src="img/logo-wasabiapp.png"
+			alt="logo_wasabi_sushi.png" />
+		<div id="div-boas-vindas">
+			<p>
+				Seja bem-vindo(a) <span th:text="${cliente.nome}"></span>
+			</p>
+		</div>
+		<div class="btns-gaveta">
+			<a th:href="@{/home}" id="sidenav-home-btn">Home<i
+				style="float: right" class="bi bi-house"></i>
+			</a> <a href="alterar-cadastro.html">Alterar cadastro<i
+				style="float: right" class="bi bi-person-circle"></i></a> <a
+				id="btn-sair" th:href="@{/logout}">Sair da conta<i
+				style="float: right" class="bi bi-box-arrow-right"></i></a>
+		</div>
+	</div>
+	<!-- gaveta fim -->
+	<div class="container-modal">
+		<div class="row conteudo-modal d-flex">
+			<p id="modal-texto-up">Pedido realizado com sucesso!</p>
+			<img th:src="@{/images/check-mark.png}" alt="" id="img-check-mark" />
+			<p id="modal-texto-down">Prazo para entrega: 50 a 60 minutos</p>
+			<div id="container-btn-voltar-tela-principal">
+				<a th:href="@{/home}" id="btn-voltar-tela-principal">Voltar à
+					tela principal</a>
+			</div>
+		</div>
+	</div>
+	<div id="background" onclick="closeNav()">
+		<div class="flex-container">
+			<div id="container-lista-pedido" class="flex-child">
+				<div id="titulo-carrinho">Pedido</div>
+				<hr />
+				<div class="listapedido"></div>
+				<hr />
+				<div class="row mt-3 mb-4">
+					<a href="#">Alterar pedido</a>
+				</div>
+			</div>
+			<div id="container-menu-pagamento" class="flex-child">
+				<div id="div-topo-menu-pagamento">
+					<div id="div-info-cliente">
+						<p id="p-nome-cliente">
+							Cliente: <span th:text="${cliente.nome}"></span>
+						</p>
+						<p id="p-endereco-cliente">
+							Endereço: <span th:text="${endereco.logradouro}"></span>, <span
+								th:text="${endereco.numero}"></span>, <span
+								th:text="${endereco.bairro}"></span> - <span
+								th:text="${endereco.cidade}"></span><br /> <span
+								th:text="${endereco.complemento}"></span>
+						</p>
+					</div>
+					<div id="div-status-tempo">
+						<div id="card-status-tempo">
+							<div id="row-status">
+								<p>Status: &nbsp;&nbsp;Aberto</p>
+								<img id="img-green-light" th:src="@{/images/green-light.png}" alt="" />
+							</div>
+							<div id="row-previsao">
+								<p>Previsão:</p>
+								<p>50 a 60 minutos</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="div-observacao-final">
+					<label id="observacao-final" for="observacao-final">Informações
+						adicionais</label><br />
+					<textarea id="observacao-final" name="observacao-final"></textarea>
+				</div>
+				<div id="div-forma-pagamento">
+					<p id="title-pagamento">Pagamento na entrega</p>
+					<hr id="hr-pagamento" />
+					<div id="div-opcoes-pagamento">
+						<div id="div-opcao-dinheiro">
+							<img id="dinheiro-icone" th:src="@{/images/dinheiro-icone.png}" alt="" />
+							<label for="opcao-dinheiro">Dinheiro </label> <input type="radio"
+								id="opcao-dinheiro" name="opcao-pagamento-radio" value="" />
+						</div>
+						<hr />
+						<div id="div-opcao-credito">
+							<img id="credito-icone" th:src="@{/images/icon-credit-card.png}" alt="" />
+							<label for="opcao-credito" style="text-align: left">Cartão
+								de crédito</label> <input type="radio" id="opcao-credito"
+								name="opcao-pagamento-radio" value="" />
+						</div>
+						<hr />
+						<div id="div-opcao-debito">
+							<img id="debito-icone" th:src="@{/images/icon-debit-card.png}" alt="" /> <label
+								for="opcao-debito">Cartão de débito</label> <input type="radio"
+								id="opcao-debito" name="opcao-pagamento-radio" value="" />
+						</div>
+					</div>
+				</div>
+				<div id="div-pagamento-escolhido">
+					<label for="input-troco">Troco: </label> <input type="text"
+						name="input-troco" id="input-troco" />
+				</div>
+			</div>
+		</div>
+		<div id="container-botao-pedido">
+			<input type="submit" value="Enviar pedido"
+				class="btn btn-primary mt-5" id="btn-enviar-pedido" />
+		</div>
+	</div>
+	<script th:src="@{../dist/js/pagamento.js}" defer></script>
+</body>
+</html>
