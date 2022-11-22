@@ -252,12 +252,14 @@ public class MainController {
 
 		for (ProdutoPedido pp : this.produtosPedido) {
 			if (pp.getProduto().getIdProduto().equals(id)) {
-				
+
 				if (acao.equals(1)) {
 					pp.setQuantidade(pp.getQuantidade() + 1);
-				} else if (acao.equals(0)) {
+					pp.setSubtotal(pp.getSubtotal() + pp.getProduto().getPreco());
+				} else if ((acao.equals(0)) && (pp.getQuantidade() != 1)) {
 					pp.setQuantidade(pp.getQuantidade() - 1);
-				} 				
+					pp.setSubtotal(pp.getSubtotal() - pp.getProduto().getPreco());
+				}
 				break;
 			}
 		}
@@ -267,53 +269,53 @@ public class MainController {
 		return modelAndView;
 	}
 
-	
-	@RequestMapping(value = { "/removerProduto/{id}" }, method = RequestMethod.GET)
-	public ModelAndView removerProduto(@PathVariable Integer id) {
+	@RequestMapping(value = { "/removerProduto/{id}/{tela}" }, method = RequestMethod.GET)
+	public ModelAndView removerProduto(@PathVariable Integer id, @PathVariable Integer tela) {
+
+		String view = "";
+
+		if (tela.equals(0)) {
+			view = "home";
+		} else if (tela.equals(1)) {
+			view = "pagamento";
+		}
 
 		for (ProdutoPedido pp : this.produtosPedido) {
 			if (pp.getProduto().getIdProduto().equals(id)) {
-				
+
 				this.produtosPedido.remove(pp);
-						
+
 				break;
 			}
 		}
 
-		ModelAndView modelAndView = new ModelAndView("redirect:/pagamento");
-
-		return modelAndView;
-	}
-	
-	
-	@RequestMapping(value = { "/removerProdutoHome/{id}" }, method = RequestMethod.GET)
-	public ModelAndView removerProdutoHome(@PathVariable Integer id) {
-
-		for (ProdutoPedido pp : this.produtosPedido) {
-			if (pp.getProduto().getIdProduto().equals(id)) {
-				
-				this.produtosPedido.remove(pp);
-						
-				break;
-			}
-		}
-
-		ModelAndView modelAndView = new ModelAndView("redirect:/home");
+		ModelAndView modelAndView = new ModelAndView("redirect:/" + view);
 
 		return modelAndView;
 	}
 
-	
 	@RequestMapping(value = { "/adicionarProdutoCarrinho" }, method = RequestMethod.POST)
 	public ModelAndView adicionar(Integer quantidade, Integer idProduto, Model model) {
 		ProdutoPedido produtoPedido = new ProdutoPedido();
 		Produto produto = produtos.findByIdProduto(idProduto);
+		Integer controle = 0;
 
-		produtoPedido.setProduto(produto);
-		produtoPedido.setQuantidade(quantidade);
-		produtoPedido.setSubtotal(quantidade * produto.getPreco());
+		for (ProdutoPedido pp : this.produtosPedido) {
+			if (pp.getProduto().getIdProduto().equals(produto.getIdProduto())) {
+				pp.setQuantidade(pp.getQuantidade() + quantidade);
+				pp.setSubtotal(pp.getSubtotal() + (quantidade * pp.getProduto().getPreco()));
+				controle = 1;
+				break;
+			}
+		}
 
-		this.produtosPedido.add(produtoPedido);
+		if (controle == 0) {
+			produtoPedido.setProduto(produto);
+			produtoPedido.setQuantidade(quantidade);
+			produtoPedido.setSubtotal(quantidade * produto.getPreco());
+
+			this.produtosPedido.add(produtoPedido);
+		}
 
 		ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
