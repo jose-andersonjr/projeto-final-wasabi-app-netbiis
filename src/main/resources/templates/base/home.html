@@ -145,9 +145,9 @@
 											<li class="valor-unitario" th:text="|Preço: R$ ${produtoPedido.subtotal}|"></li>
 										</div>
 										<div class="itembtnset">
-											<button class="itembtn">
-												<span>Remover</span>
-											</button>
+											<div class="itembtn">
+												<a th:href="@{/removerProdutoHome/{id}(id=${produtoPedido.produto.idProduto})}">Remover</a>
+											</div>
 										</div>
 									</div>
 								</th:block>

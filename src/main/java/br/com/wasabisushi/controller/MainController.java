@@ -266,6 +266,7 @@ public class MainController {
 
 		return modelAndView;
 	}
+
 	
 	@RequestMapping(value = { "/removerProduto/{id}" }, method = RequestMethod.GET)
 	public ModelAndView removerProduto(@PathVariable Integer id) {
@@ -283,7 +284,26 @@ public class MainController {
 
 		return modelAndView;
 	}
+	
+	
+	@RequestMapping(value = { "/removerProdutoHome/{id}" }, method = RequestMethod.GET)
+	public ModelAndView removerProdutoHome(@PathVariable Integer id) {
 
+		for (ProdutoPedido pp : this.produtosPedido) {
+			if (pp.getProduto().getIdProduto().equals(id)) {
+				
+				this.produtosPedido.remove(pp);
+						
+				break;
+			}
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/home");
+
+		return modelAndView;
+	}
+
+	
 	@RequestMapping(value = { "/adicionarProdutoCarrinho" }, method = RequestMethod.POST)
 	public ModelAndView adicionar(Integer quantidade, Integer idProduto, Model model) {
 		ProdutoPedido produtoPedido = new ProdutoPedido();
