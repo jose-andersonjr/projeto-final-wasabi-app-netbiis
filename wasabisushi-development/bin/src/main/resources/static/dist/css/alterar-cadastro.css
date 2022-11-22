@@ -1,0 +1,128 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bec4c4;
+  border-radius: 3px;
+  height: 20vh;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-control {
+  border: 1px solid rgba(88, 86, 86, 0.663);
+  margin: 1em auto;
+  height: 3.2em;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(88, 86, 86, 0.46);
+  -moz-box-shadow: 0px 0px 2px 1px rgba(88, 86, 86, 0.46);
+  box-shadow: 0px 0px 2px 1px rgba(88, 86, 86, 0.46);
+}
+
+form {
+  height: 100%;
+  padding: 0 5%;
+  display: flex;
+  text-align: center;
+  background-color: whitesmoke;
+}
+
+.container-inputs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background-color: rgb(215, 17, 17);
+  border: none;
+  border-radius: 0.2em;
+}
+
+.btn-primary:hover {
+  background-color: rgb(135, 6, 6);
+  transition: 0.3s;
+}
+
+.btn {
+  font-size: 15px;
+  font-weight: 500;
+  height: 5vh;
+  width: 30vh;
+}
+
+#container-form {
+  padding: 0;
+}
+
+#container-form form #titulo-cadastrar {
+  font-size: 30px;
+  padding-left: 1%;
+}
+
+#div-numero {
+  padding-top: 1%;
+}
+
+.container-fluid {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+#container-imagem img {
+  top: 0;
+  position: sticky;
+  height: 100vh;
+  width: 100%;
+}
+
+#container-imagem {
+  padding: 0 0 0 0 !important;
+}
+
+.form-group label {
+  display: flex;
+  justify-content: start;
+  padding-top: 2%;
+}
+
+hr {
+  margin-top: 3% !important;
+}
+
+#btn-alterar:disabled {
+  background: #7a7878;
+}
+
+#btn-cancelar {
+  border-radius: 3px;
+  background-color: rgb(54, 53, 53);
+  margin-top: 2%;
+  width: 30vh;
+  height: 5vh;
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+#btn-cancelar:hover {
+  background-color: rgb(0, 0, 0);
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
