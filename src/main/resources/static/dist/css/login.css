@@ -6,12 +6,9 @@
   font-family: 'Roboto', sans-serif;
 }
 
-body {
-  overflow-y: hidden;
-}
-
 form {
   padding-top: 10vh;
+  height: 100%;
   width: 85%;
   /* border-radius: 1.5em; */
   display: flex;
@@ -24,7 +21,7 @@ form {
 
 .form-group {
   /* background-color: rgb(255, 231, 199); */
-
+	height: 100%;
   width: 100%;
 }
 
@@ -95,7 +92,6 @@ button a:hover {
 #container-form {
   background-color: whitesmoke;
   padding: 0 0 0 0;
-  height: 100vh;
   display: flex;
   justify-content: center;
 }
@@ -116,10 +112,11 @@ button a:hover {
 }
 
 #img-container img {
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
 #img-container {
   padding: 0 0 0 0 !important;
+
 }
