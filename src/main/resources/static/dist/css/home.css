@@ -343,6 +343,7 @@ footer {
 #botoes-comando {
   display: flex;
   justify-content: space-around;
+  margin-top: 2%;
 }
 
 #botoes-comando button {
@@ -367,8 +368,8 @@ footer {
   transition: 0.3s;
 }
 
-#quantidade-modal input {
-  width: 30%;
+#quantidade{
+  width: 10%;
   margin-left: 10%;
 }
 
@@ -579,4 +580,8 @@ textarea#observacoes {
 
 a {
   text-decoration: none;
+}
+
+.hidden {
+	display:none;
 }
