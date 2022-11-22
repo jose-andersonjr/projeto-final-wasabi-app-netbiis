@@ -43,7 +43,7 @@ body {
   display: flex;
   justify-content: center;
   height: 5vh;
-  margin: 0.5rem 0.5rem 0 0.5rem;
+
   
 }
 
@@ -111,6 +111,7 @@ body {
   width: 30vh;
 }
 #btn-enviar-pedido {
+	margin-top: 1%;
   color:white;
 }
 
@@ -131,6 +132,7 @@ body {
 
 #input-troco{
   border: 1px solid;
+
 }
 
 #container-btn-voltar-tela-principal {
@@ -153,13 +155,12 @@ body {
 
 .listapedido {
   list-style: none;
-  padding: 3%;
-  background-color: whitesmoke;
   font-size: 16px;
   overflow: auto;
-  height: 60vh;
+  height: 62vh;
   margin-inline: 2%;
 }
+
 
 #div-info-cliente {
   padding: 3%;
@@ -186,31 +187,19 @@ textarea#observacao-final {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 35%;
-  padding: 3%;
+  height: auto;
+  padding: 0px 3%;
   text-align: center;
   font-size: medium;
   font-weight: lighter;
 }
 
-#hr-pagamento {
-  background-color: brown;
-  height: 2px;
-}
-
 #div-pagamento-escolhido {
-  padding-inline: 3%;
-  height: 15%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+	margin: 2% 2% 0px 2%;
+  display: block;
+
 }
 
-#div-opcoes-pagamento {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
 
 #div-opcao-dinheiro,
 #div-opcao-credito,
@@ -225,7 +214,9 @@ textarea#observacao-final {
   background-color: whitesmoke;
   cursor: pointer;
   transition: 0.3s;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px; 
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
 }
 
 #div-opcao-dinheiro:hover,
@@ -244,22 +235,25 @@ input#opcao-debito {
 #div-topo-menu-pagamento {
   display: flex;
   flex-direction: row;
+  
 }
 
 #div-status-tempo {
-  padding: 2%;
+
   background-color: white;
-  margin: 3%;
-  width: 25%;
-  height: 2.3rem;
-  -webkit-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
-  -moz-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
-  box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  margin: 2%;
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 40%;
   justify-content: space-between;
   border-radius: 3px;
+}
+
+#card-status-tempo{
+	padding: 10%;
+	-webkit-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  -moz-box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
+  box-shadow: 0px 0px 8px 2px rgba(44, 73, 73, 0.315);
 }
 
 #title-pagamento {
@@ -301,15 +295,6 @@ input#opcao-debito {
 }
 
 
-
-.listapedido {
-  list-style: none;
-  padding: 7.2%;
-  color: rgb(116, 124, 142);
-  font-size: 16px;
-  overflow: auto;
-  height: 48vh;
-}
 
 .itembloco {
   margin-bottom: 20px;
@@ -361,4 +346,49 @@ input#opcao-debito {
   color: rgb(53, 51, 51);
   font-weight: 600;
   text-align: justify;
+}
+
+.bi-plus-circle,
+.bi-dash-circle,
+.bi-trash3-fill{
+	font-size:20px;
+	color: red;
+	
+}
+
+.bi-dash-circle{
+	margin-right: 5%;	
+}
+
+.bi-trash3-fill{
+	margin-left: 60%;
+}
+
+.container-img-pedido img{
+	width: 100%;
+	height: 100%;
+
+}
+
+.container-img-pedido{
+		padding: 0 0 0 0;
+}
+
+.container-info-pedido p{
+	margin-bottom: 0px;
+}
+
+.container-info-pedido{
+		padding-right: 0px;
+}
+
+.container-produto-pedido {
+	margin: 1% 0;
+	padding: 2%;
+	border: 1px solid gray;
+}
+
+.container-qtd-sub p{
+	font-size: 13px;
+	color: gray;
 }
