@@ -75,4 +75,28 @@ inputTroco.addEventListener('keypress', (e) => {
 })
 
 
-// ===================== TOAST ==================
+// ===================== ATUALIZAR VALOR PEDIDO  ==================
+function round(num) {
+	return +(Math.round(num + 'e+2') + 'e-2')
+}
+
+function atualizarValorPedido() { //  Somando total da lista de pedido
+	let valorTotalPedido = 10;
+	var itemsLista = document.getElementsByClassName('container-produto-pedido')
+	for (let item of itemsLista) {
+		let valorSubtotal = item.querySelector('#itemsubtotal').textContent
+		valorSubtotal = valorSubtotal.replace('Subtotal: R$ ', '')
+		valorSubtotal = round(valorSubtotal)
+		valorTotalPedido = valorTotalPedido + valorSubtotal
+		valorSubtotal = 'Subtotal: R$ ' + valorSubtotal.toFixed(2).toString(10).replace('.',',')
+		item.querySelector('#itemsubtotal').innerText = valorSubtotal
+
+	}
+	valorTotalPedido = round(valorTotalPedido).toFixed(2).toString(10)
+	valorTotalPedido = valorTotalPedido.replace('.', ',')
+	let totalPedidoCarrinho = document.querySelector('#totalpedidocarrinho')
+	totalPedidoCarrinho.innerText = valorTotalPedido
+
+}
+
+atualizarValorPedido()

@@ -122,12 +122,9 @@ function atualizarValorPedido() { //  Somando total da lista de pedido
 	for (let item of itemsLista) {
 		let valorSubtotal = item.querySelector('.valor-unitario').textContent
 		valorSubtotal = valorSubtotal.replace('Subtotal: R$ ', '')
-		//let quantidade = item.querySelector('#itemquantidade').textContent
-		//quantidade = quantidade.replace('Quantidade: ', '')
-		//let somatorio = round(valorUnitario * quantidade)
 		valorSubtotal = round(valorSubtotal)
 		valorTotalPedido = valorTotalPedido + valorSubtotal
-		valorSubtotal = valorSubtotal.toString(10)
+		valorSubtotal = valorSubtotal.toFixed(2).toString(10)
 		item.querySelector('.valor-unitario').innerText = 'Subtotal: R$ ' + valorSubtotal.replace('.', ',')
 
 	}

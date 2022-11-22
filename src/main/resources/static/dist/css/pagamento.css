@@ -17,7 +17,13 @@ body {
   display: flex;
 }
 
-#container-lista-pedido {
+#container-imagem-lateral{
+	padding: 0 0 0 0;
+}
+
+#container-lista-pedido,
+#container-imagem-lateral {
+	
   background-color: white;
   margin: 0.5rem 0 0 0.5rem;
   width: 25%;
@@ -29,7 +35,6 @@ body {
 
 #container-menu-pagamento {
   display: flex;
-  flex-direction: column;
   background-color: white;
   margin: 0.5rem 0 0 0.5rem;
   width: 50%;
@@ -43,8 +48,6 @@ body {
   display: flex;
   justify-content: center;
   height: 5vh;
-
-  
 }
 
 
@@ -110,6 +113,7 @@ body {
   height: 5vh;
   width: 30vh;
 }
+
 #btn-enviar-pedido {
 	margin-top: 1%;
   color:white;
@@ -353,8 +357,9 @@ input#opcao-debito {
 .bi-plus-circle,
 .bi-dash-circle,
 .bi-trash3-fill{
-	font-size:20px;
+	font-size:22px;
 	color: red;
+
 	
 }
 
@@ -403,4 +408,23 @@ input#opcao-debito {
 #container-btnAlterarPedido a{
 	width: 80%;
 	margin-top: 2%;
+}
+
+#btnAlterarPedido {
+	  background-color: rgb(54, 53, 53);
+}
+
+#btnAlterarPedido {
+	font-size: 16px;
+
+}
+
+#hr {
+  height:3px !important;
+  color: rgb(135, 6, 6);
+}
+
+#container-imagem-lateral img {
+	height: 100%;
+	width: 100%;
 }
