@@ -35,19 +35,24 @@
 	</button>
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}" alt="logo_wasabi_sushi.png" />
+		<div id="wasabi-logo-circle">
+			<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}" alt="logo_wasabi_sushi.png" />
+		</div>
 		<div id="div-boas-vindas">
 			<p>
 				Seja bem-vindo(a) <span th:text="${cliente.nome}"></span>
 			</p>
 		</div>
 		<div class="btns-gaveta">
-			<a th:href="@{/home}" id="sidenav-home-btn">Home<i style="float: right" class="bi bi-house"></i>
+			<a style="pointer-events: none" th:href="@{/home}" id="sidenav-home-btn">Home<i style="float: right"
+					class="bi bi-house"></i>
 			</a>
 			<form th:action="@{/alterarCadastro}">
-				<input type="hidden" th:field="*{usuario.idUsuario}" name="idUsuario" /> <input type="submit"
-					value="Alterar Cadastro" />
-				<i style="float: right" class="bi bi-person-circle"></i>
+				<input type="hidden" th:field="*{usuario.idUsuario}" name="idUsuario" />
+				<div id="div-btn-alterar">
+					<i class="bi bi-person-circle" id="icon-alterar-home"></i>
+					<input type="submit" value="Alterar Cadastro" id="sidenav-alterar-btn">
+				</div>
 			</form>
 			<a id="btn-sair" th:href="@{/logout}">Sair da conta<i style="float: right"
 					class="bi bi-box-arrow-right"></i></a>
@@ -120,7 +125,7 @@
 													<div id="botoes-comando">
 														<button class="btn btn-primary" id="btn-voltar">Voltar</button>
 														<input type="submit" class="btn btn-primary" value="Adicionar"
-															id="btn-adicionar" onclick="atualizarValorPedido()"/>
+															id="btn-adicionar" onclick="atualizarValorPedido()" />
 													</div>
 												</div>
 											</form>
@@ -132,7 +137,7 @@
 					</div>
 				</div>
 				<div class="col-xl-3 col-sm-12 container-principal-carrinho">
-					<form th:action="@{/pagamento}" method="GET">
+					<form th:action="@{/pagamento}" method="GET" id="formulario-pagamento">
 						<div class="col-12 container-conteudo-carrinho">
 							<div id="titulo-carrinho">Pedido</div>
 							<hr />
@@ -141,12 +146,15 @@
 									<div class="itembloco">
 										<li class="itemtitle" th:text="${produtoPedido.produto.nome}"></li>
 										<div class="iteminfo">
-											<li id="itemquantidade" th:text="|Quantidade: ${produtoPedido.quantidade}|"></li>
-											<li class="valor-unitario" th:text="|Preço: R$ ${produtoPedido.subtotal}|"></li>
+											<li id="itemquantidade" th:text="|Quantidade: ${produtoPedido.quantidade}|">
+											</li>
+											<li class="valor-unitario" th:text="|Preço: R$ ${produtoPedido.subtotal}|">
+											</li>
 										</div>
 										<div class="itembtnset">
 											<div class="itembtn">
-												<a th:href="@{/removerProdutoHome/{id}(id=${produtoPedido.produto.idProduto})}">Remover</a>
+												<a
+													th:href="@{/removerProdutoHome/{id}(id=${produtoPedido.produto.idProduto})}">Remover</a>
 											</div>
 										</div>
 									</div>

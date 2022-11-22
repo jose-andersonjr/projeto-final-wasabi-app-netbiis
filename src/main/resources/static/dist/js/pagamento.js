@@ -73,3 +73,8 @@ inputTroco.addEventListener('keypress', (e) => {
     return
   }
 })
+
+
+// ===================== TOAST ==================
+const formularioPagamento = document.querySelector('#formulario-pagamento')
+formularioPagamento.addEventListener('submit', switchModal())
