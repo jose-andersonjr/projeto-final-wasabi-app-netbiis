@@ -27,18 +27,20 @@
 	</button>
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}"
-			alt="logo_wasabi_sushi.png" />
+		<div id="wasabi-logo-circle">
+			<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}" alt="logo_wasabi_sushi.png" />
+		</div>
 		<div id="div-boas-vindas">
 			<p>
 				Seja bem-vindo(a) <span th:text="${clientes.nome}"></span>
 			</p>
 		</div>
 		<div class="btns-gaveta">
-			<a th:href="@{/home}" id="sidenav-home-btn">Home<i
-				style="float: right" class="bi bi-house"></i>
-			</a> <a id="btn-sair" th:href="@{/logout}">Sair da conta<i
-				style="float: right" class="bi bi-box-arrow-right"></i></a>
+			<a th:href="@{/home}" id="sidenav-home-btn">Home<i style="float: right" class="bi bi-house"></i></a>
+			<a style="pointer-events: none" id="sidenav-alterar-btn">Alterar Cadastro<i style="float: right"
+					class="bi bi-person-circle" id="icon-alterar"></i></a>
+			<a id="btn-sair" th:href="@{/logout}">Sair da conta<i style="float: right"
+					class="bi bi-box-arrow-right"></i></a>
 		</div>
 	</div>
 

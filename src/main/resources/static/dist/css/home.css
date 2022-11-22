@@ -237,14 +237,14 @@ footer {
 
 /* ============================================================================================= */
 
-.itembtn a {
+.itembtn span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.itembtn a:after {
+.itembtn span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -253,11 +253,11 @@ footer {
   transition: 0.5s;
 }
 
-.itembtn:hover a {
+.itembtn:hover span {
   padding-right: 25px;
 }
 
-.itembtn:hover a:after {
+.itembtn:hover span:after {
   opacity: 1;
   right: 0;
 }
@@ -589,4 +589,14 @@ a {
 .container-botao-pagamento{
 	display:flex;
 	justify-content: center;
+}
+
+#pagamento-btn {
+	width: 100%;
+	background-color: red;
+}
+
+#pagamento-btn:hover {
+	transition: 0.3s;
+	background-color: #a11313;
 }
