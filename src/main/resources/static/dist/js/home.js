@@ -40,6 +40,7 @@ const switchModal = () => {
 	} else {
 		modal.style.display = 'block'
 	}
+	habilitarPagamento();
 }
 
 window.onclick = function(event) {
@@ -90,75 +91,6 @@ for (let i = 0; i < cardsProdutos.length; i++) {
 		false
 	)
 }
-
-
-// ======================= PASSAGEM DE DADOS MODAL -> LISTA DE PEDIDO ===================================== //
-const listaPedido = document.querySelector('div.listapedido')
-const btnAdicionar = document.querySelector('#btn-adicionar')
-
-btnAdicionar.addEventListener('click', () => {
-	const modalAberto = document.querySelector('.conteudo-modal')
-	/// ======================= CRIANDO A DIV DE CADA PRODUTO =========================
-	let divItemBloco = document.createElement('div')
-	divItemBloco.className = 'itembloco'
-	let liItemTitle = document.createElement('li')
-	liItemTitle.className = 'itemtitle'
-	let divItemInfo = document.createElement('div')
-	divItemInfo.className = 'iteminfo'
-	let liItemQuantidade = document.createElement('li')
-	liItemQuantidade.id = 'itemquantidade'
-	let liItemPreco = document.createElement('li')
-	liItemPreco.id = 'itempreco'
-	let divItemBtnSet = document.createElement('div')
-	divItemBtnSet.className = 'itembtnset'
-	let btnRemover = document.createElement('button')
-	btnRemover.className = 'itembtn'
-	btnRemover.innerHTML = '<span>Remover</span>'
-
-	divItemBtnSet.appendChild(btnRemover)
-	divItemInfo.appendChild(liItemQuantidade)
-	divItemInfo.appendChild(liItemPreco)
-	divItemBloco.appendChild(liItemTitle)
-	divItemBloco.appendChild(divItemInfo)
-	divItemBloco.appendChild(divItemBtnSet)
-
-	listaPedido.appendChild(divItemBloco)
-
-	// pegando o valor unitário do produto e convertendo ele para numero
-	let precoProdutoModal =
-		modalAberto.querySelector('.preco-produto').textContent
-	precoProdutoModal = precoProdutoModal.replace('R$', '').replace(',', '.')
-
-	precoProdutoModal = round(precoProdutoModal)
-
-	// PEGANDO O NOME DO PRODUTO
-	let nomeProduto = modalAberto.querySelector(
-		'.container-nome-modal h5'
-	).textContent
-	liItemTitle.innerText = nomeProduto
-
-	// colocando um valor no Valortotal no modal
-
-	let quantidadeModal = modalAberto.querySelector('#quantidade')
-	let quantidade = quantidadeModal.value
-	liItemQuantidade.innerText = 'Quantidade: ' + quantidade
-
-	let precoTotal = precoProdutoModal * quantidade
-	precoTotal = round(precoTotal)
-	liItemPreco.innerText = 'Preço: R$' + precoTotal
-
-	// ADICIONANDO FUNCAO DE REMOVER O PROPRIO BOTAO
-	btnRemover.addEventListener('click', (event) => {
-		let cardProdutoCarrinho = divItemBloco
-		somarTotalPedido(Math.abs(precoTotal) * -1)
-		cardProdutoCarrinho.remove()
-		habilitarPagamento()
-	})
-
-	somarTotalPedido(precoTotal)
-	switchModal()
-	habilitarPagamento()
-})
 
 let valorTotalPedido = 10
 function somarTotalPedido(precoProduto) {
@@ -214,3 +146,12 @@ function habilitarPagamento() {
 }
 
 
+// =============================== Remover produto ===============================================
+function removerProduto(divProduto){
+	let cardProdutoCarrinho = divProduto
+	somarTotalPedido(Math.abs(precoTotal) * -1)
+	cardProdutoCarrinho.remove()
+	habilitarPagamento()
+}
+
+habilitarPagamento()
