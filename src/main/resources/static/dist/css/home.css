@@ -585,3 +585,8 @@ a {
 .hidden {
 	display:none;
 }
+
+.container-botao-pagamento{
+	display:flex;
+	justify-content: center;
+}
