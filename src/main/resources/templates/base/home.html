@@ -120,7 +120,7 @@
 													<div id="botoes-comando">
 														<button class="btn btn-primary" id="btn-voltar">Voltar</button>
 														<input type="submit" class="btn btn-primary" value="Adicionar"
-															id="btn-adicionar" />
+															id="btn-adicionar" onclick="atualizarValorPedido()"/>
 													</div>
 												</div>
 											</form>
@@ -141,12 +141,11 @@
 									<div class="itembloco">
 										<li class="itemtitle" th:text="${produtoPedido.produto.nome}"></li>
 										<div class="iteminfo">
-											<li id="itemquantidade" th:text="|Quantidade: ${produtoPedido.quantidade}|">
-											</li>
-											<li th:text="|Preço: ${produtoPedido.subtotal}|"></li>
+											<li id="itemquantidade" th:text="|Quantidade: ${produtoPedido.quantidade}|"></li>
+											<li class="valor-unitario" th:text="|Preço: R$ ${produtoPedido.subtotal}|"></li>
 										</div>
 										<div class="itembtnset">
-											<button class="itembtn" onclick="removerProduto(this)">
+											<button class="itembtn">
 												<span>Remover</span>
 											</button>
 										</div>

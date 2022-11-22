@@ -3,7 +3,7 @@ const modal = document.querySelector('.container-modal')
 
 const switchModal = () => {
 	const actualStyle = modal.style.display
-	if (actualStyle == 'block') {
+	if (actualStyle == 'block') { // LIMPANDO AS DIVS AO FECHAR O MODAL
 		modal.style.display = 'none'
 		let imagemModal = document.querySelector('.container-imagem-modal')
 		let nomeModal = document.querySelector('.container-nome-modal')
@@ -15,23 +15,23 @@ const switchModal = () => {
 		while (formularioSpring.firstChild) {
 			formularioSpring.removeChild(formularioSpring.firstChild)
 		}
-		
+
 		while (valorTotalModal.firstChild) {
 			valorTotalModal.removeChild(valorTotalModal.firstChild)
 		}
-		
+
 		while (valorUnitModal.firstChild) {
 			valorUnitModal.removeChild(valorUnitModal.firstChild)
 		}
-		
+
 		while (descricaoModal.firstChild) {
 			descricaoModal.removeChild(descricaoModal.firstChild)
 		}
-		
+
 		while (nomeModal.firstChild) {
 			nomeModal.removeChild(nomeModal.firstChild)
 		}
-		
+
 		while (imagemModal.firstChild) {
 			imagemModal.removeChild(imagemModal.firstChild)
 		}
@@ -55,55 +55,52 @@ window.onclick = function(event) {
 var cardsProdutos = document.getElementsByClassName('card-produto')
 
 for (let i = 0; i < cardsProdutos.length; i++) {
-	cardsProdutos[i].addEventListener('click',function(event) {
-			let cardProduto = event.currentTarget
-			let imagemDoCard = cardProduto.querySelector('.imagem-produto img')
-			let nomeDoCard = cardProduto.querySelector('.texto-produto h5')
-			let descricaoDoCard = cardProduto.querySelector('.descricao-produto')
-			let valorUnitDoCard = cardProduto.querySelector('.preco-produto')
-			let imagemDoCardClone = imagemDoCard.cloneNode(true)
-			let nomeDoCardClone = nomeDoCard.cloneNode(true)
-			let valorUnitDoCardClone = valorUnitDoCard.cloneNode(true)
-			let descricaoDoCardClone = descricaoDoCard.cloneNode(true)
-			let containerImagemModal = document.querySelector('.container-imagem-modal')
-			let containerNomeModal = document.querySelector('.container-nome-modal')
-			let containerDescricaoModal = document.querySelector('.container-descricao-modal') 
-			let containerValorUnitModal = document.querySelector('#valor-unit-modal')
-			let containerValorTotal = document.querySelector('#valor-total-modal span')
+	cardsProdutos[i].addEventListener('click', function(event) {
+		let cardProduto = event.currentTarget
+		let imagemDoCard = cardProduto.querySelector('.imagem-produto img')
+		let nomeDoCard = cardProduto.querySelector('.texto-produto h5')
+		let descricaoDoCard = cardProduto.querySelector('.descricao-produto')
+		let valorUnitDoCard = cardProduto.querySelector('.preco-produto')
+		let imagemDoCardClone = imagemDoCard.cloneNode(true)
+		let nomeDoCardClone = nomeDoCard.cloneNode(true)
+		let valorUnitDoCardClone = valorUnitDoCard.cloneNode(true)
+		let descricaoDoCardClone = descricaoDoCard.cloneNode(true)
+		let containerImagemModal = document.querySelector('.container-imagem-modal')
+		let containerNomeModal = document.querySelector('.container-nome-modal')
+		let containerDescricaoModal = document.querySelector('.container-descricao-modal')
+		let containerValorUnitModal = document.querySelector('#valor-unit-modal')
+		let containerValorTotal = document.querySelector('#valor-total-modal span')
 
 
-			// ================================= PASSANDO O FORM (HIDDEN) DO CARD PARA O MODAL ==================================================
-			const springForm = cardProduto.querySelector('.formulario-spring')
-			const springFormClone = springForm.cloneNode(true)
-			springFormClone.classList.remove("hidden")
-			const containerInformacoesModal = document.querySelector('.container-form-modal')
-			containerInformacoesModal.appendChild(springFormClone)
-			containerImagemModal.appendChild(imagemDoCardClone)
-			containerNomeModal.appendChild(nomeDoCardClone)
-			containerDescricaoModal.appendChild(descricaoDoCardClone)
-			containerValorUnitModal.appendChild(valorUnitDoCardClone)
+		// ================================= PASSANDO O FORM (HIDDEN) DO CARD PARA O MODAL ==================================================
+		const springForm = cardProduto.querySelector('.formulario-spring')
+		const springFormClone = springForm.cloneNode(true)
+		springFormClone.classList.remove("hidden")
+		const containerInformacoesModal = document.querySelector('.container-form-modal')
+		containerInformacoesModal.appendChild(springFormClone)
+		containerImagemModal.appendChild(imagemDoCardClone)
+		containerNomeModal.appendChild(nomeDoCardClone)
+		containerDescricaoModal.appendChild(descricaoDoCardClone)
+		containerValorUnitModal.appendChild(valorUnitDoCardClone)
 
-			containerValorTotal.innerText = valorUnitDoCardClone.textContent
+		containerValorTotal.innerText = valorUnitDoCardClone.textContent
 
-			switchModal()
-			// alterarValorTotal(cardProduto)
-		},
+		switchModal()
+		// alterarValorTotal(cardProduto)
+	},
 		false
 	)
 }
 
-let valorTotalPedido = 10
-function somarTotalPedido(precoProduto) {
-	precoProduto = round(precoProduto)
-	valorTotalPedido = round(valorTotalPedido + precoProduto)
-	document.querySelector('#totalpedidocarrinho').innerText = valorTotalPedido
-}
+
 
 function round(num) {
 	return +(Math.round(num + 'e+2') + 'e-2')
 }
 
-function alterarValorTotal(event) {
+// ====== somar subtotal do modal e valor total da lista pedido ===============
+
+function alterarValorTotal(event) {//Somando subtotal modal
 	// console.log(event)
 	let qtdProduto = event.value
 	//pegar o valor do produto no modal
@@ -116,6 +113,28 @@ function alterarValorTotal(event) {
 	valorTotal = valorTotal.toString(10)
 	containerValorTotal.innerText = 'R$ ' + valorTotal.replace('.', ',')
 }
+
+
+
+function atualizarValorPedido() { //  Somando total da lista de pedido
+	let valorTotalPedido = 10;
+	var itemsLista = document.getElementsByClassName('itembloco')
+	for (let item of itemsLista) {
+		let valorUnitario = item.querySelector('.valor-unitario').textContent
+		valorUnitario = valorUnitario.replace('Preço: R$ ', '')
+		let quantidade = item.querySelector('#itemquantidade').textContent
+		quantidade = quantidade.replace('Quantidade: ', '')
+		let somatorio = round(valorUnitario * quantidade)
+		valorTotalPedido = valorTotalPedido + somatorio
+
+	}
+	valorTotalPedido = valorTotalPedido.toFixed(2).toString(10)
+	valorTotalPedido = valorTotalPedido.replace('.', ',')
+	let totalPedidoCarrinho = document.querySelector('#totalpedidocarrinho')
+	totalPedidoCarrinho.innerText = valorTotalPedido
+
+}
+
 
 // =============================================================== GAVETA ========================================================
 
@@ -146,12 +165,21 @@ function habilitarPagamento() {
 }
 
 
-// =============================== Remover produto ===============================================
-function removerProduto(divProduto){
-	let cardProdutoCarrinho = divProduto
-	somarTotalPedido(Math.abs(precoTotal) * -1)
-	cardProdutoCarrinho.remove()
-	habilitarPagamento()
-}
-
 habilitarPagamento()
+atualizarValorPedido()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
