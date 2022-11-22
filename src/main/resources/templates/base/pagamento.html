@@ -98,7 +98,13 @@
 					</th:block>
 				</div>
 				<hr />
-				<div class="row mt-3 mb-4">
+				<div class="descricao-pedido">
+					<div>Taxa de entrega: R$ 10,00</div>
+					<div>
+						Total: R$ <span id="totalpedidocarrinho"></span>
+					</div>
+				</div>
+				<div id="container-btnAlterarPedido">
 					<a th:href="@{/home}" class="btn btn-primary">Alterar pedido</a>
 				</div>
 			</div>
@@ -120,23 +126,24 @@
 						<div id="div-status-tempo">
 							<div id="card-status-tempo">
 								<div id="row-status">
-									<p>Status: &nbsp;&nbsp;Aberto</p>
+									<span>Status: &nbsp;&nbsp;Aberto</span>
 									<img id="img-green-light" th:src="@{/images/green-light.png}" alt="" />
 								</div>
 								<div id="row-previsao">
-									<p>Previsão:</p>
-									<p>50 a 60 minutos</p>
+									<span>Previsão:</span>
+									<span>50 a 60 minutos</span>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div id="div-observacao-final">
-						<label id="observacao-final" for="observacao-final">Informações
-							adicionais</label><br />
+						<label id="observacao-final" for="observacao-final"><b>Informações
+							adicionais: </b></label><br />
 						<textarea id="observacao-final" name="observacao-final"></textarea>
 					</div>
 					<div id="div-forma-pagamento">
 						<p id="title-pagamento">Pagamento na entrega</p>
+						<hr>
 						<div id="div-opcao-dinheiro">
 							<img id="dinheiro-icone" th:src="@{/images/dinheiro-icone.png}" alt="" /> <label
 								for="opcao-dinheiro">Dinheiro </label> <input type="radio" id="opcao-dinheiro"

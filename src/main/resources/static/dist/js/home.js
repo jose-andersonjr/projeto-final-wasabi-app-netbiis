@@ -129,7 +129,7 @@ function atualizarValorPedido() { //  Somando total da lista de pedido
 		valorTotalPedido = valorTotalPedido + valorSubtotal
 		valorSubtotal = valorSubtotal.toString(10)
 		item.querySelector('.valor-unitario').innerText = 'Preço: R$ ' + valorSubtotal.replace('.', ',')
-		
+
 	}
 	valorTotalPedido = round(valorTotalPedido).toFixed(2).toString(10)
 	valorTotalPedido = valorTotalPedido.replace('.', ',')

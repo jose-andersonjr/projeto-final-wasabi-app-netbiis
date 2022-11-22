@@ -229,22 +229,25 @@ footer {
   font-weight: bolder;
 }
 
-/* ========================================= NOVO ============================================== */
-
-.itembtn:hover {
-  color: rgb(122, 3, 3);
+/* ============================================================================================= */
+.itembtn:hover{
+	color:#a11313;
 }
 
-/* ============================================================================================= */
+.itembtn a:hover{
+	color:#a11313;
+}
 
-.itembtn span {
+.itembtn a {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
+   color: red;
 }
 
-.itembtn span:after {
+
+.itembtn a:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -253,11 +256,11 @@ footer {
   transition: 0.5s;
 }
 
-.itembtn:hover span {
+.itembtn:hover a {
   padding-right: 25px;
 }
 
-.itembtn:hover span:after {
+.itembtn:hover a:after {
   opacity: 1;
   right: 0;
 }
