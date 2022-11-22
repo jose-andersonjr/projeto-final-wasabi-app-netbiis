@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="pt-br"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
@@ -36,7 +37,8 @@
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<div id="wasabi-logo-circle">
-			<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}" alt="logo_wasabi_sushi.png" />
+			<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}"
+				alt="logo_wasabi_sushi.png" />
 		</div>
 		<div id="div-boas-vindas">
 			<p>
@@ -44,22 +46,25 @@
 			</p>
 		</div>
 		<div class="btns-gaveta">
-			<a style="pointer-events: none" th:href="@{/home}" id="sidenav-home-btn">Home<i style="float: right"
-					class="bi bi-house"></i>
+			<a style="pointer-events: none" th:href="@{/home}"
+				id="sidenav-home-btn">Home<i style="float: right"
+				class="bi bi-house"></i>
 			</a>
 			<form th:action="@{/alterarCadastro}">
-				<input type="hidden" th:field="*{usuario.idUsuario}" name="idUsuario" />
+				<input type="hidden" th:field="*{usuario.idUsuario}"
+					name="idUsuario" />
 				<div id="div-btn-alterar">
-					<i class="bi bi-person-circle" id="icon-alterar-home"></i>
-					<input type="submit" value="Alterar Cadastro" id="sidenav-alterar-btn">
+					<i class="bi bi-person-circle" id="icon-alterar-home"></i> <input
+						type="submit" value="Alterar Cadastro" id="sidenav-alterar-btn">
 				</div>
 			</form>
-			<a id="btn-sair" th:href="@{/logout}">Sair da conta<i style="float: right"
-					class="bi bi-box-arrow-right"></i></a>
+			<a id="btn-sair" th:href="@{/logout}">Sair da conta<i
+				style="float: right" class="bi bi-box-arrow-right"></i></a>
 		</div>
 	</div>
 	<!-- fim gaveta -->
-	<div class="row container-fluid" id="container-pagina" onclick="closeNav()">
+	<div class="row container-fluid" id="container-pagina"
+		onclick="closeNav()">
 		<div id="container-capa" class="col-12">
 			<div class="row d-flex justify-content-center container-logo"></div>
 		</div>
@@ -71,10 +76,10 @@
 					<div class="container-informacoes-modal col-6">
 						<div class="container-nome-modal text-center"></div>
 						<div class="container-descricao-modal"></div>
-						<textarea name="observacoes" id="observacoes" placeholder="Observação..."
-							maxlength="99"></textarea>
+						<textarea name="observacoes" id="observacoes"
+							placeholder="Observação..." maxlength="99"></textarea>
 						<div class="container-quantidade-preco-modal row">
-							<div class="col-6" id="valor-unit-modal">Unidade: </div>
+							<div class="col-6" id="valor-unit-modal">Unidade:</div>
 							<div class="col-6" id="valor-total-modal">
 								Subtotal: <span></span>
 							</div>
@@ -92,8 +97,8 @@
 							<div class="row items-pesquisar">
 								<th:block th:each="categoria : ${categorias}">
 									<div class="col-xl-3 col-sm-12 itembtnset">
-										<a th:text="${categoria.nome}" th:href="|#${categoria.idCategoria}|"
-											class="itembtn"></a>
+										<a th:text="${categoria.nome}"
+											th:href="|#${categoria.idCategoria}|" class="itembtn"></a>
 									</div>
 								</th:block>
 							</div>
@@ -108,24 +113,26 @@
 										<div class="row card-produto">
 											<div class="texto-produto col">
 												<h5 th:text="${produto.nome}"></h5>
-												<span class="descricao-produto" th:text="${produto.descricao}"></span>
-												<span class="preco-produto" th:text="${produto.precoFormatado}"></span>
+												<span class="descricao-produto"
+													th:text="${produto.descricao}"></span> <span
+													class="preco-produto" th:text="${produto.precoFormatado}"></span>
 											</div>
 											<div class="imagem-produto col-4">
 												<img th:src="|/imagem/${produto.idProduto}|" alt="" />
 											</div>
 											<form th:action="@{/adicionarProdutoCarrinho}" method="POST"
 												class="hidden formulario-spring">
-												<label for="quantidade">Quantidade</label>
-												<input type="number" min="1" value="1" onkeydown="return false"
+												<label for="quantidade">Quantidade</label> <input
+													type="number" min="1" value="1" onkeydown="return false"
 													onclick="alterarValorTotal(this)" id="quantidade"
-													name="quantidade" />
-												<input type="hidden" th:value="${produto.idProduto}" name="idProduto" />
+													name="quantidade" /> <input type="hidden"
+													th:value="${produto.idProduto}" name="idProduto" />
 												<div class="container-botoes-modal">
 													<div id="botoes-comando">
 														<button class="btn btn-primary" id="btn-voltar">Voltar</button>
-														<input type="submit" class="btn btn-primary" value="Adicionar"
-															id="btn-adicionar" onclick="atualizarValorPedido()" />
+														<input type="submit" class="btn btn-primary"
+															value="Adicionar" id="btn-adicionar"
+															onclick="atualizarValorPedido()" />
 													</div>
 												</div>
 											</form>
@@ -137,7 +144,8 @@
 					</div>
 				</div>
 				<div class="col-xl-3 col-sm-12 container-principal-carrinho">
-					<form th:action="@{/pagamento}" method="GET" id="formulario-pagamento">
+					<form th:action="@{/pagamento}" method="GET"
+						id="formulario-pagamento">
 						<div class="col-12 container-conteudo-carrinho">
 							<div id="titulo-carrinho">Pedido</div>
 							<hr />
@@ -154,7 +162,7 @@
 										<div class="itembtnset">
 											<div class="itembtn">
 												<a
-													th:href="@{/removerProdutoHome/{id}(id=${produtoPedido.produto.idProduto})}">Remover</a>
+													th:href="@{/removerProduto/{id}/{tela}(id=${produtoPedido.produto.idProduto},tela=${0})}">Remover</a>
 											</div>
 										</div>
 									</div>
@@ -168,8 +176,8 @@
 								</div>
 							</div>
 							<div class="container-botao-pagamento">
-								<input type="submit" class="pagamentobtn btn btn-primary" id="pagamento-btn"
-									value="Ir ao pagamento" />
+								<input type="submit" class="pagamentobtn btn btn-primary"
+									id="pagamento-btn" value="Ir ao pagamento" />
 							</div>
 						</div>
 					</form>
