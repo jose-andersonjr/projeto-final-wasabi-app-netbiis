@@ -60,7 +60,6 @@ public class MainController {
 
 	List<ProdutoPedido> produtosPedido = new ArrayList<ProdutoPedido>();
 
-	public Date data = new Date();
 	SimpleDateFormat fd = new SimpleDateFormat("yyyy-MM-dd");
 	SimpleDateFormat hf = new SimpleDateFormat("HH:mm:ss");
 	SimpleDateFormat dfBR = new SimpleDateFormat("dd/MM/yyyy");
@@ -186,7 +185,7 @@ public class MainController {
 		pagamento.addObject("endereco", endereco);
 		pagamento.addObject("categorias", categorias.findAll());
 		pagamento.addObject("carrinho", this.produtosPedido);
-		pagamento.addObject("pagamento", new Pedido());
+		pagamento.addObject("pedido", new Pedido());
 
 		if (this.logado)
 			return pagamento;
@@ -197,8 +196,6 @@ public class MainController {
 	@RequestMapping(value = { "/salvarPedido" }, method = RequestMethod.POST)
 	public ModelAndView salvarPedido(@Valid Cliente cliente, @Valid Pedido pedido, final BindingResult result,
 			Model model, RedirectAttributes redirectAttributes) {
-
-		System.out.println("cliente " + cliente.getIdCliente());
 
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("pedidos", pedido);
@@ -212,15 +209,17 @@ public class MainController {
 
 		pedido.setValorTotal(taxaEntrega + valorPedido);
 		pedido.setCliente(cliente);
-		pedido.setData(this.fd.format(this.data));
-		pedido.setHora(this.hf.format(this.data));
+		Date data = new Date();
+		pedido.setData(this.fd.format(data));
+		pedido.setHora(this.hf.format(data));
 		this.pedidos.save(pedido);
 
 		for (ProdutoPedido produtoPedido : this.produtosPedido) {
-			produtoPedido
-					.setPedido(pedidos.getPedidoByDataAndHoraAndCliente(pedido.getData(), pedido.getHora(), cliente));
+			produtoPedido.setPedido(pedido);
 			produtosPedidos.save(produtoPedido);
 		}
+
+		produtosPedido.clear();
 
 		ModelAndView modelAndView = new ModelAndView("redirect:/home");
 
@@ -248,7 +247,43 @@ public class MainController {
 		return acesso_negado;
 	}
 
-	// @ResponseBody
+	@RequestMapping(value = { "/alterarQuantidade/{id}/{acao}" }, method = RequestMethod.GET)
+	public ModelAndView alterarQuantidade(@PathVariable Integer id, @PathVariable Integer acao) {
+
+		for (ProdutoPedido pp : this.produtosPedido) {
+			if (pp.getProduto().getIdProduto().equals(id)) {
+				
+				if (acao.equals(1)) {
+					pp.setQuantidade(pp.getQuantidade() + 1);
+				} else if (acao.equals(0)) {
+					pp.setQuantidade(pp.getQuantidade() - 1);
+				} 				
+				break;
+			}
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/pagamento");
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "/removerProduto/{id}" }, method = RequestMethod.GET)
+	public ModelAndView removerProduto(@PathVariable Integer id) {
+
+		for (ProdutoPedido pp : this.produtosPedido) {
+			if (pp.getProduto().getIdProduto().equals(id)) {
+				
+				this.produtosPedido.remove(pp);
+						
+				break;
+			}
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/pagamento");
+
+		return modelAndView;
+	}
+
 	@RequestMapping(value = { "/adicionarProdutoCarrinho" }, method = RequestMethod.POST)
 	public ModelAndView adicionar(Integer quantidade, Integer idProduto, Model model) {
 		ProdutoPedido produtoPedido = new ProdutoPedido();

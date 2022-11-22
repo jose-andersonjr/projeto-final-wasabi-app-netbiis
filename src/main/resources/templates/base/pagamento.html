@@ -71,24 +71,24 @@
 				<hr />
 				<div class="listapedido">
 					<th:block th:each="produtoPedido : ${carrinho}">
-						<div class="itembloco">
-							<li class="itemtitle" th:text="${produtoPedido.produto.nome}"></li>
-							<div class="iteminfo">
-								<li id="itemquantidade" th:text="|Quantidade: ${produtoPedido.quantidade}|">
-								</li>
-								<li th:text="|Preço: ${produtoPedido.subtotal}|"></li>
-							</div>
-							<div class="itembtnset">
-								<button class="itembtn" onclick="removerProduto(this)">
-									<span>Remover</span>
-								</button>
-							</div>
+						<div>
+							<p th:text="${produtoPedido.produto.nome}"></p>
+							<!-- 							<p th:text="${produtoPedido.produto.descricao}"></p> -->
+							<p th:text="|Quantidade: ${produtoPedido.quantidade}|"></p>
+							<a class="btn btn-success"
+								th:href="@{/alterarQuantidade/{id}/{acao}(id=${produtoPedido.produto.idProduto},acao=${1})}">|+|</a>
+								<a class="btn btn-success"
+								th:href="@{/alterarQuantidade/{id}/{acao}(id=${produtoPedido.produto.idProduto},acao=${0})}">|-|</a>
+								<a class="btn btn-danger"
+								th:href="@{/removerProduto/{id}(id=${produtoPedido.produto.idProduto})}">|Remover Item|</a>
+							<hr />
+							<p th:text="${produtoPedido.subtotal}"></p>
 						</div>
 					</th:block>
 				</div>
 				<hr />
 				<div class="row mt-3 mb-4">
-					<a href="#">Alterar pedido</a>
+					<a th:href="@{/home}" class="btn btn-primary">Alterar pedido</a>
 				</div>
 			</div>
 			<div id="container-menu-pagamento" class="flex-child">
@@ -119,10 +119,12 @@
 							</div>
 						</div>
 					</div>
-					<div id="div-observacao-final">
-						<label id="observacao-final" for="observacao-final">Informações
-							adicionais</label><br />
-						<textarea id="observacao-final" name="observacao-final"></textarea>
+					<div class="row">
+						<div id="div-observacao-final">
+							<label id="observacao-final" for="observacao-final">Informações
+								adicionais</label><br />
+							<textarea id="observacao-final" name="observacao-final"></textarea>
+						</div>
 					</div>
 					<div id="div-forma-pagamento">
 						<p id="title-pagamento">Pagamento na entrega</p>
