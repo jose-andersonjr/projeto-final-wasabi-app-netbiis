@@ -237,14 +237,14 @@ footer {
 
 /* ============================================================================================= */
 
-.itembtn span {
+.itembtn a {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.itembtn span:after {
+.itembtn a:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -253,11 +253,11 @@ footer {
   transition: 0.5s;
 }
 
-.itembtn:hover span {
+.itembtn:hover a {
   padding-right: 25px;
 }
 
-.itembtn:hover span:after {
+.itembtn:hover a:after {
   opacity: 1;
   right: 0;
 }

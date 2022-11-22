@@ -120,15 +120,18 @@ function atualizarValorPedido() { //  Somando total da lista de pedido
 	let valorTotalPedido = 10;
 	var itemsLista = document.getElementsByClassName('itembloco')
 	for (let item of itemsLista) {
-		let valorUnitario = item.querySelector('.valor-unitario').textContent
-		valorUnitario = valorUnitario.replace('Preço: R$ ', '')
-		let quantidade = item.querySelector('#itemquantidade').textContent
-		quantidade = quantidade.replace('Quantidade: ', '')
-		let somatorio = round(valorUnitario * quantidade)
-		valorTotalPedido = valorTotalPedido + somatorio
-
+		let valorSubtotal = item.querySelector('.valor-unitario').textContent
+		valorSubtotal = valorSubtotal.replace('Preço: R$ ', '')
+		//let quantidade = item.querySelector('#itemquantidade').textContent
+		//quantidade = quantidade.replace('Quantidade: ', '')
+		//let somatorio = round(valorUnitario * quantidade)
+		valorSubtotal = round(valorSubtotal)
+		valorTotalPedido = valorTotalPedido + valorSubtotal
+		valorSubtotal = valorSubtotal.toString(10)
+		item.querySelector('.valor-unitario').innerText = 'Preço: R$ ' + valorSubtotal.replace('.', ',')
+		
 	}
-	valorTotalPedido = valorTotalPedido.toFixed(2).toString(10)
+	valorTotalPedido = round(valorTotalPedido).toFixed(2).toString(10)
 	valorTotalPedido = valorTotalPedido.replace('.', ',')
 	let totalPedidoCarrinho = document.querySelector('#totalpedidocarrinho')
 	totalPedidoCarrinho.innerText = valorTotalPedido

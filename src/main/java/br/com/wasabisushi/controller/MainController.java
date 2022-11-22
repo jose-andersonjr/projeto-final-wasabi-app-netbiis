@@ -94,7 +94,7 @@ public class MainController {
 	@RequestMapping(value = "/acesso_negado", method = RequestMethod.GET)
 	public String acessoNegado() {
 
-		return "base/acesso_negado";
+		return "error/error403";
 	}
 
 	@RequestMapping(value = { "/cadastro" }, method = RequestMethod.GET)
@@ -148,7 +148,7 @@ public class MainController {
 		if (this.logado) {
 			return new ModelAndView("usuario/alterar-cadastro");
 		}
-		return new ModelAndView("base/acesso_negado");
+		return new ModelAndView("error/error403");
 	}
 
 	@RequestMapping(value = { "/salvarAlteracao" }, method = RequestMethod.POST)
@@ -177,7 +177,7 @@ public class MainController {
 	@RequestMapping(value = { "/pagamento" }, method = RequestMethod.GET)
 	public ModelAndView pagamento() {
 		ModelAndView pagamento = new ModelAndView("base/pagamento");
-		ModelAndView acesso_negado = new ModelAndView("base/acesso_negado");
+		ModelAndView acesso_negado = new ModelAndView("error/error403");
 		pagamento.addObject("usuario", usuario);
 		Cliente cliente = clientes.findByUsuario(usuario);
 		pagamento.addObject("cliente", cliente);
@@ -235,7 +235,7 @@ public class MainController {
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public ModelAndView home() {
 		ModelAndView home = new ModelAndView("base/home");
-		ModelAndView acesso_negado = new ModelAndView("base/acesso_negado");
+		ModelAndView acesso_negado = new ModelAndView("error/error403");
 		home.addObject("usuario", usuario);
 		home.addObject("cliente", clientes.findByUsuario(usuario));
 		home.addObject("categorias", categorias.findAll());
@@ -266,6 +266,7 @@ public class MainController {
 
 		return modelAndView;
 	}
+
 	
 	@RequestMapping(value = { "/removerProduto/{id}" }, method = RequestMethod.GET)
 	public ModelAndView removerProduto(@PathVariable Integer id) {
@@ -283,7 +284,26 @@ public class MainController {
 
 		return modelAndView;
 	}
+	
+	
+	@RequestMapping(value = { "/removerProdutoHome/{id}" }, method = RequestMethod.GET)
+	public ModelAndView removerProdutoHome(@PathVariable Integer id) {
 
+		for (ProdutoPedido pp : this.produtosPedido) {
+			if (pp.getProduto().getIdProduto().equals(id)) {
+				
+				this.produtosPedido.remove(pp);
+						
+				break;
+			}
+		}
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/home");
+
+		return modelAndView;
+	}
+
+	
 	@RequestMapping(value = { "/adicionarProdutoCarrinho" }, method = RequestMethod.POST)
 	public ModelAndView adicionar(Integer quantidade, Integer idProduto, Model model) {
 		ProdutoPedido produtoPedido = new ProdutoPedido();
