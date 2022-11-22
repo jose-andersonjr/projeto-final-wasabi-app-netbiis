@@ -6,6 +6,7 @@
   font-weight: 700;
   font: inherit;
   font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -293,14 +294,71 @@ input#opcao-debito {
   font-size: 16px;
 }
 
-#dinheiro-icone {
+#dinheiro-icone,
+#credito-icone,
+#debito-icone{
   height: 50%;
 }
 
-#credito-icone {
-  height: 50%;
+
+
+.listapedido {
+  list-style: none;
+  padding: 7.2%;
+  color: rgb(116, 124, 142);
+  font-size: 16px;
+  overflow: auto;
+  height: 48vh;
 }
 
-#debito-icone {
-  height: 50%;
+.itembloco {
+  margin-bottom: 20px;
+}
+
+.itemtitle {
+  color: black;
+  font-size: large;
+}
+
+.iteminfo {
+  color: rgb(102, 102, 102);
+  font-size: small;
+}
+
+.itembtnset {
+  margin-top: 2ex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.itembtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.itembtn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.itembtn:hover span {
+  padding-right: 25px;
+}
+
+.itembtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.descricao-pedido {
+  color: rgb(53, 51, 51);
+  font-weight: 600;
+  text-align: justify;
 }

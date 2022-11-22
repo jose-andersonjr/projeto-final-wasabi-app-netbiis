@@ -54,7 +54,6 @@
 		</div>
 	</div>
 	<!-- fim gaveta -->
-
 	<div class="row container-fluid" id="container-pagina" onclick="closeNav()">
 		<div id="container-capa" class="col-12">
 			<div class="row d-flex justify-content-center container-logo"></div>
@@ -70,7 +69,7 @@
 						<textarea name="observacoes" id="observacoes" placeholder="Observação..."
 							maxlength="99"></textarea>
 						<div class="container-quantidade-preco-modal row">
-                            <div class="col-6" id="valor-unit-modal">Unidade: </div>
+							<div class="col-6" id="valor-unit-modal">Unidade: </div>
 							<div class="col-6" id="valor-total-modal">
 								Subtotal: <span></span>
 							</div>
@@ -110,9 +109,6 @@
 											<div class="imagem-produto col-4">
 												<img th:src="|/imagem/${produto.idProduto}|" alt="" />
 											</div>
-											<!-- 											<div class="id-produto" style="display: none">Id -->
-											<!-- 												produto</div> -->
-
 											<form th:action="@{/adicionarProdutoCarrinho}" method="POST"
 												class="hidden formulario-spring">
 												<label for="quantidade">Quantidade</label>
@@ -127,34 +123,14 @@
 															id="btn-adicionar" />
 													</div>
 												</div>
-
 											</form>
 										</div>
-
 									</div>
 								</th:block>
 							</th:block>
 						</div>
 					</div>
 				</div>
-				<!-- 				<div class="col-xl-3 col-sm-12 container-principal-carrinho"> -->
-				<!-- 					<form th:action="@{/pagamento}" method="GET"> -->
-				<!-- 						<div class="col-12 container-conteudo-carrinho"> -->
-				<!-- 							<div id="titulo-carrinho">Pedido</div> -->
-				<!-- 							<hr /> -->
-				<!-- 							<div class="listapedido"></div> -->
-				<!-- 							<hr /> -->
-				<!-- 							<div class="descricao-pedido"> -->
-				<!-- 								<div>Taxa de entrega: R$ 10,00</div> -->
-				<!-- 								<div> -->
-				<!-- 									Total: R$ <span id="totalpedidocarrinho"></span> -->
-				<!-- 								</div> -->
-				<!-- 							</div> -->
-				<!-- 							<input type="submit" class="pagamentobtn btn btn-primary" -->
-				<!-- 								id="pagamento-btn" value="Ir ao pagamento" /> -->
-				<!-- 						</div> -->
-				<!-- 					</form> -->
-				<!-- 				</div> -->
 				<div class="col-xl-3 col-sm-12 container-principal-carrinho">
 					<form th:action="@{/pagamento}" method="GET">
 						<div class="col-12 container-conteudo-carrinho">
@@ -162,14 +138,19 @@
 							<hr />
 							<div class="listapedido">
 								<th:block th:each="produtoPedido : ${carrinho}">
-									<div>
-										<p th:text="${produtoPedido.produto.nome}"></p>
-										<p th:text="${produtoPedido.produto.descricao}"></p>
-										<p th:text="${produtoPedido.quantidade}"></p>
-										<hr />
-										<p th:text="${produtoPedido.subtotal}"></p>
+									<div class="itembloco">
+										<li class="itemtitle" th:text="${produtoPedido.produto.nome}"></li>
+										<div class="iteminfo">
+											<li id="itemquantidade" th:text="|Quantidade: ${produtoPedido.quantidade}|">
+											</li>
+											<li th:text="|Preço: ${produtoPedido.subtotal}|"></li>
+										</div>
+										<div class="itembtnset">
+											<button class="itembtn" onclick="removerProduto(this)">
+												<span>Remover</span>
+											</button>
+										</div>
 									</div>
-									<hr />
 								</th:block>
 							</div>
 							<hr />

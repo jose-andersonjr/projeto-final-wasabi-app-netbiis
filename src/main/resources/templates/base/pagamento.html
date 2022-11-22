@@ -1,38 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" lang="pt-br"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Wasabi Sushi - Pagamento</title>
-<link
-	th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous" defer />
-<link rel="stylesheet"
-	th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css}" />
-<script
-	th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js}"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous" defer></script>
-<script
-	th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js}"
-	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-	crossorigin="anonymous" defer></script>
-<script
-	th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js}"
-	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-	crossorigin="anonymous" defer></script>
-<script th:src="@{https://code.jquery.com/jquery-3.6.1.js}"
-	integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" th:href="@{../dist/css/pagamento.css}" />
-<link rel="stylesheet" th:href="@{../dist/css/botao-e-gaveta.css}" />
-<link rel="shortcut icon" th:href="@{/images/favicon.ico}" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Wasabi Sushi - Pagamento</title>
+	<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css}" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"
+		defer />
+	<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css}" />
+	<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js}"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"
+		defer></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js}"
+		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"
+		defer></script>
+	<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js}"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"
+		defer></script>
+	<script th:src="@{https://code.jquery.com/jquery-3.6.1.js}"
+		integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" th:href="@{../dist/css/pagamento.css}" />
+	<link rel="stylesheet" th:href="@{../dist/css/botao-e-gaveta.css}" />
+	<link rel="shortcut icon" th:href="@{/images/favicon.ico}" />
 </head>
+
 <body>
 	<!-- gaveta inicio -->
 	<button class="btn-float" onclick="openNav()">
@@ -40,24 +34,22 @@
 	</button>
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}"
-			alt="logo_wasabi_sushi.png" />
+		<img id="wasabi-logo-drawer" th:src="@{/images/logo-wasabiapp.png}" alt="logo_wasabi_sushi.png" />
 		<div id="div-boas-vindas">
 			<p>
 				Seja bem-vindo(a) <span th:text="${cliente.nome}"></span>
 			</p>
 		</div>
 		<div class="btns-gaveta">
-			<a th:href="@{/home}" id="sidenav-home-btn">Home<i
-				style="float: right" class="bi bi-house"></i>
+			<a th:href="@{/home}" id="sidenav-home-btn">Home<i style="float: right" class="bi bi-house"></i>
 			</a>
 			<form th:action="@{/alterarCadastro}">
-				<input type="hidden" th:field="*{usuario.idUsuario}"
-					name="idUsuario" /> <input type="submit" value="Alterar Cadastro" />
+				<input type="hidden" th:field="*{usuario.idUsuario}" name="idUsuario" /> <input type="submit"
+					value="Alterar Cadastro" />
 				<i style="float: right" class="bi bi-person-circle"></i>
 			</form>
-			<a id="btn-sair" th:href="@{/logout}">Sair da conta<i
-				style="float: right" class="bi bi-box-arrow-right"></i></a>
+			<a id="btn-sair" th:href="@{/logout}">Sair da conta<i style="float: right"
+					class="bi bi-box-arrow-right"></i></a>
 		</div>
 	</div>
 	<!-- gaveta fim -->
@@ -92,7 +84,6 @@
 							<hr />
 							<p th:text="${produtoPedido.subtotal}"></p>
 						</div>
-						<hr />
 					</th:block>
 				</div>
 				<hr />
@@ -103,32 +94,27 @@
 			<div id="container-menu-pagamento" class="flex-child">
 				<form th:action="@{/salvarPedido}" method="POST">
 					<div id="div-topo-menu-pagamento">
-						<div class="row">
-							<div id="div-info-cliente">
-								<input type="hidden" name="idCliente"
-									th:value="${cliente.idCliente}" />
-								<p id="p-nome-cliente">
-									Cliente: <span th:text="${cliente.nome}"></span>
-								</p>
-								<p id="p-endereco-cliente">
-									Endereço: <span th:text="${endereco.logradouro}"></span>, <span
-										th:text="${endereco.numero}"></span>, <span
-										th:text="${endereco.bairro}"></span> - <span
-										th:text="${endereco.cidade}"></span><br /> <span
-										th:text="${endereco.complemento}"></span>
-								</p>
-							</div>
-							<div id="div-status-tempo">
-								<div id="card-status-tempo">
-									<div id="row-status">
-										<p>Status: &nbsp;&nbsp;Aberto</p>
-										<img id="img-green-light" th:src="@{/images/green-light.png}"
-											alt="" />
-									</div>
-									<div id="row-previsao">
-										<p>Previsão:</p>
-										<p>50 a 60 minutos</p>
-									</div>
+						<div id="div-info-cliente">
+							<input type="hidden" name="idCliente" th:value="${cliente.idCliente}" />
+							<p id="p-nome-cliente">
+								Cliente: <span th:text="${cliente.nome}"></span>
+							</p>
+							<p id="p-endereco-cliente">
+								Endereço: <span th:text="${endereco.logradouro}"></span>, <span
+									th:text="${endereco.numero}"></span>, <span th:text="${endereco.bairro}"></span> -
+								<span th:text="${endereco.cidade}"></span><br /> <span
+									th:text="${endereco.complemento}"></span>
+							</p>
+						</div>
+						<div id="div-status-tempo">
+							<div id="card-status-tempo">
+								<div id="row-status">
+									<p>Status: &nbsp;&nbsp;Aberto</p>
+									<img id="img-green-light" th:src="@{/images/green-light.png}" alt="" />
+								</div>
+								<div id="row-previsao">
+									<p>Previsão:</p>
+									<p>50 a 60 minutos</p>
 								</div>
 							</div>
 						</div>
@@ -140,48 +126,37 @@
 							<textarea id="observacao-final" name="observacao-final"></textarea>
 						</div>
 					</div>
-					<div class="row">
-						<div id="div-forma-pagamento">
-							<p id="title-pagamento">Pagamento na entrega</p>
-							<hr id="hr-pagamento" />
-							<div id="div-opcoes-pagamento">
-								<div id="div-opcao-dinheiro">
-									<img id="dinheiro-icone" th:src="@{/images/dinheiro-icone.png}"
-										alt="" /> <label for="opcao-dinheiro">Dinheiro </label> <input
-										type="radio" id="opcao-dinheiro" name="opcao-pagamento-radio"
-										value="Dinheiro" th:field="${pedido.formaPagamento}" />
-								</div>
-								<hr />
-								<div id="div-opcao-credito">
-									<img id="credito-icone"
-										th:src="@{/images/icon-credit-card.png}" alt="" /> <label
-										for="opcao-credito" style="text-align: left">Cartão de
-										crédito</label> <input type="radio" id="opcao-credito"
-										name="opcao-pagamento-radio" value="Cartão - Crédito"
-										th:field="${pedido.formaPagamento}" />
-								</div>
-								<hr />
-								<div id="div-opcao-debito">
-									<img id="debito-icone" th:src="@{/images/icon-debit-card.png}"
-										alt="" /> <label for="opcao-debito">Cartão de débito</label>
-									<input type="radio" id="opcao-debito"
-										name="opcao-pagamento-radio" value="Cartão - Débito"
-										th:field="${pedido.formaPagamento}" />
-								</div>
+					<div id="div-forma-pagamento">
+						<p id="title-pagamento">Pagamento na entrega</p>
+						<hr id="hr-pagamento" />
+						<div id="div-opcoes-pagamento">
+							<div id="div-opcao-dinheiro">
+								<img id="dinheiro-icone" th:src="@{/images/dinheiro-icone.png}" alt="" /> <label
+									for="opcao-dinheiro">Dinheiro </label> <input type="radio" id="opcao-dinheiro"
+									name="opcao-pagamento-radio" value="" />
+							</div>
+							<hr />
+							<div id="div-opcao-credito">
+								<img id="credito-icone" th:src="@{/images/icon-credit-card.png}" alt="" /> <label
+									for="opcao-credito" style="text-align: left">Cartão
+									de crédito</label> <input type="radio" id="opcao-credito"
+									name="opcao-pagamento-radio" value="" />
+							</div>
+							<hr />
+							<div id="div-opcao-debito">
+								<img id="debito-icone" th:src="@{/images/icon-debit-card.png}" alt="" /> <label
+									for="opcao-debito">Cartão de débito</label> <input type="radio" id="opcao-debito"
+									name="opcao-pagamento-radio" value="" />
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div id="div-pagamento-escolhido">
-							<label for="input-troco">Troco: </label> <input type="text"
-								name="input-troco" id="input-troco" />
-						</div>
-						<div class="row">
-							<div id="container-botao-pedido">
-								<input type="submit" value="Enviar pedido"
-									class="btn btn-primary mt-5" id="btn-enviar-pedido" />
-							</div>
-						</div>
+					<div id="div-pagamento-escolhido">
+						<label for="input-troco">Troco: </label> <input type="text" name="input-troco"
+							id="input-troco" />
+					</div>
+					<div id="container-botao-pedido">
+						<input type="submit" value="Enviar pedido" class="btn btn-primary mt-5"
+							id="btn-enviar-pedido" />
 					</div>
 				</form>
 			</div>
@@ -189,4 +164,5 @@
 	</div>
 	<script th:src="@{../dist/js/pagamento.js}" defer></script>
 </body>
+
 </html>
