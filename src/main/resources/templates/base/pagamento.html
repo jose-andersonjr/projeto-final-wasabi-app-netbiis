@@ -161,9 +161,10 @@
 								name="opcao-pagamento-radio" th:field="*{pedido.formaPagamento}" value="Cartão - Débito" />
 						</div>
 					</div>
-					<div id="div-pagamento-escolhido">
-						<label for="input-troco">Troco: </label> <input type="text" name="input-troco"
+					<div id="div-pagamento-escolhido" >
+						<label for="input-troco">Valor de pagamento: </label> <input type="text" name="input-troco"
 							id="input-troco" />
+							<p id="btn-gerar-troco" class="btn btn-primary" onclick="gerarTroco()">Gerar troco</p>
 					</div>
 					<div id="container-botao-pedido">
 						<input type="submit" value="Enviar pedido" class="btn btn-primary form-group" id="btn-enviar-pedido"

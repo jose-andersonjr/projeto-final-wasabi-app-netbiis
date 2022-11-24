@@ -3,39 +3,39 @@
 const modal = document.querySelector('.container-modal')
 
 const switchModal = () => {
-  const actualStyle = modal.style.display
-  if (actualStyle == 'block') {
-    modal.style.display = 'none'
-  } else {
-    modal.style.display = 'block'
-  }
+	const actualStyle = modal.style.display
+	if (actualStyle == 'block') {
+		modal.style.display = 'none'
+	} else {
+		modal.style.display = 'block'
+	}
 }
 
 
 // =============================================== CHECAR RADIOBUTTON ======================================================== //
 
 const areaDinheiro = document.querySelector('div#div-opcao-dinheiro')
-areaDinheiro.addEventListener('click', function () {
-  let radioBtnDinheiro = document.querySelector('input#opcao-dinheiro')
-  radioBtnDinheiro.checked = true
-  btnEnviarPedido.disabled=false
-  divTroco.style.display = 'block'
+areaDinheiro.addEventListener('click', function() {
+	let radioBtnDinheiro = document.querySelector('input#opcao-dinheiro')
+	radioBtnDinheiro.checked = true
+	btnEnviarPedido.disabled = false
+	divTroco.style.display = 'block'
 })
 
 const areaCredito = document.querySelector('div#div-opcao-credito')
-areaCredito.addEventListener('click', function () {
-  let radioBtnCredito = document.querySelector('input#opcao-credito')
-  radioBtnCredito.checked = true
-  btnEnviarPedido.disabled=false
-  divTroco.style.display = 'none'
+areaCredito.addEventListener('click', function() {
+	let radioBtnCredito = document.querySelector('input#opcao-credito')
+	radioBtnCredito.checked = true
+	btnEnviarPedido.disabled = false
+	divTroco.style.display = 'none'
 })
 
 const areaDebito = document.querySelector('div#div-opcao-debito')
-areaDebito.addEventListener('click', function () {
-  let radioBtnDebito = document.querySelector('input#opcao-debito')
-  radioBtnDebito.checked = true
-  btnEnviarPedido.disabled=false
-  divTroco.style.display = 'none'
+areaDebito.addEventListener('click', function() {
+	let radioBtnDebito = document.querySelector('input#opcao-debito')
+	radioBtnDebito.checked = true
+	btnEnviarPedido.disabled = false
+	divTroco.style.display = 'none'
 
 })
 
@@ -45,19 +45,19 @@ areaDebito.addEventListener('click', function () {
 const sideNav = document.getElementById('mySidenav')
 
 function openNav() {
-  sideNav.style.width = '18rem'
+	sideNav.style.width = '18rem'
 }
 
 function closeNav() {
-  sideNav.style.width = '0'
+	sideNav.style.width = '0'
 }
 
 // ============================ ENVIAR PEDIDO ===========================================
 
 const btnEnviarPedido = document.querySelector('#btn-enviar-pedido')
-btnEnviarPedido.disabled=true
-btnEnviarPedido.addEventListener('click', function () {
-  switchModal()
+btnEnviarPedido.disabled = true
+btnEnviarPedido.addEventListener('click', function() {
+	switchModal()
 })
 
 // ========================== HABILITAR TROCO ================
@@ -65,13 +65,13 @@ const divTroco = document.querySelector('#div-pagamento-escolhido')
 const inputTroco = document.querySelector('#input-troco')
 divTroco.style.display = 'none'
 inputTroco.addEventListener('keypress', (e) => {
-  const numeros = /[0-9]/
-  const key = String.fromCharCode(e.keyCode)
+	const numeros = /[0-9]/
+	const key = String.fromCharCode(e.keyCode)
 
-  if (!numeros.test(key)) {
-    e.preventDefault()
-    return
-  }
+	if (!numeros.test(key)) {
+		e.preventDefault()
+		return
+	}
 })
 
 
@@ -88,7 +88,7 @@ function atualizarValorPedido() { //  Somando total da lista de pedido
 		valorSubtotal = valorSubtotal.replace('Subtotal: R$ ', '')
 		valorSubtotal = round(valorSubtotal)
 		valorTotalPedido = valorTotalPedido + valorSubtotal
-		valorSubtotal = 'Subtotal: R$ ' + valorSubtotal.toFixed(2).toString(10).replace('.',',')
+		valorSubtotal = 'Subtotal: R$ ' + valorSubtotal.toFixed(2).toString(10).replace('.', ',')
 		item.querySelector('#itemsubtotal').innerText = valorSubtotal
 
 	}
@@ -98,5 +98,26 @@ function atualizarValorPedido() { //  Somando total da lista de pedido
 	totalPedidoCarrinho.innerText = valorTotalPedido
 
 }
+// =========================== gerar troco ==============================
+function gerarTroco() {
+	let inputTroco = document.querySelector('#input-troco').value
+	let divTroco = document.createElement('div')
+	divTroco.classList.add('novoTroco')
+	let totalPedidoCarrinho = document.querySelector('#totalpedidocarrinho').textContent
 
+	totalPedidoCarrinho = round(totalPedidoCarrinho.replace('R$', '').replace(',', '.'))
+
+	if (inputTroco > totalPedidoCarrinho) {
+		let pgmtEscolhido = document.querySelector('#div-pagamento-escolhido')
+		pgmtEscolhido.innerHTML = ''
+		valorTroco = inputTroco - totalPedidoCarrinho
+		valorTroco = valorTroco.toFixed(2)
+		divTroco.textContent = 'Troco para o cliente: R$' + valorTroco
+		
+		pgmtEscolhido.appendChild(divTroco)
+	} else {
+		alert('Favor insira um valor de pagamento maior que o custo do pedido')
+	}
+
+}
 atualizarValorPedido()
